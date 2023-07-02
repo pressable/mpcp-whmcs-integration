@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="CodeSniffer">
   <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
-  <!-- Note: the commented entries are ones that we want but require refactoring -->
-  <!-- The plan is to enabled them one at a time when ready -->
 
   <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.Arrays.ArrayIndent">
@@ -19,7 +17,7 @@
   <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
   <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
   <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
-  <rule ref="Generic.Commenting.Todo"/>
+  <!--<rule ref="Generic.Commenting.Todo"/>-->
   <rule ref="Generic.ControlStructures.InlineControlStructure"/>
   <rule ref="Generic.Files.ByteOrderMark"/>
   <rule ref="Generic.Files.EndFileNewline"/>
@@ -75,7 +73,6 @@
   <rule ref="PEAR.ControlStructures.ControlSignature"/>
   <rule ref="PEAR.Functions.ValidDefaultValue"/>
   <rule ref="Zend.Files.ClosingTag"/>
-  <rule ref="Zend.NamingConventions.ValidVariableName"/>
 
   <rule ref="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation"/>
   <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
@@ -168,7 +165,6 @@
   <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction"/>
   <rule ref="SlevomatCodingStandard.Functions.RequireMultiLineCall"/>
   <rule ref="SlevomatCodingStandard.Functions.RequireSingleLineCall"/>
-  <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
   <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse"/>
   <rule ref="SlevomatCodingStandard.Functions.StaticClosure"/>
   <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"/>
@@ -200,10 +196,8 @@
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
-  <!--<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>-->
   <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
   <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
-  <!--<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint"/>-->
   <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
   <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat"/>
   <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>

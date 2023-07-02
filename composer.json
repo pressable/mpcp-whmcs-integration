@@ -28,5 +28,8 @@
     "check:style": "./vendor/bin/phpcs -s modules",
     "fix": ["@composer fix:style"],
     "fix:style": "./vendor/bin/phpcbf modules"
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
   }
 }

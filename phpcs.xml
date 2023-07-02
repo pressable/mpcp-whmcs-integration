@@ -158,7 +158,6 @@
   <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch"/>
   <rule ref="SlevomatCodingStandard.Files.FileLength"/>
   <rule ref="SlevomatCodingStandard.Files.LineLength"/>
-  <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>
   <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration"/>
   <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
   <rule ref="SlevomatCodingStandard.Functions.DisallowNamedArguments"/>
@@ -201,7 +200,7 @@
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
-  <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
+  <!--<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>-->
   <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
   <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
   <!--<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint"/>-->

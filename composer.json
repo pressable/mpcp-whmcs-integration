@@ -7,6 +7,11 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
+  "autoload": {
+    "psr-4": {
+      "Pressable\\Whmcs\\": "modules/addons/pressable/lib/"
+    }
+  },
   "require-dev": {
     "php-parallel-lint/php-parallel-lint": "^1.3",
     "phpstan/phpstan": "^1.10",

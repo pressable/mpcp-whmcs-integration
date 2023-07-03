@@ -57,7 +57,8 @@ CONTENT;
     <label>Name <input type="text" name="name" /></label><br />
     <label>Staging <input type="checkbox" name="staging" value="true" /></label><br />
     {$options}
-    <input type="submit" value="Create a Site" />
+    <input type="submit" value="Create Site" />
+    <a href="{$this->postUrl}"><button type="button">Cancel</button></a>
   </form>
 CONTENT;
   }

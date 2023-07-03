@@ -19,6 +19,16 @@ class Client
   public function __construct(private string $id, private string $secret)
   {}
 
+  public function datacenterList(): ResponseInterface
+  {
+    return $this->apiGet('sites/datacenters');
+  }
+
+  public function siteInstallOptionList(): ResponseInterface
+  {
+    return $this->apiGet('sites/install-options');
+  }
+
   public function siteList(array $query): ResponseInterface
   {
     $data = ['paginate' => true];
@@ -31,6 +41,11 @@ class Client
     }
 
     return $this->apiGet('sites', $data);
+  }
+
+  public function phpVersionsList(): ResponseInterface
+  {
+    return $this->apiGet('sites/php-versions');
   }
 
   private function apiGet(string $resource, ?array $data = null): ResponseInterface

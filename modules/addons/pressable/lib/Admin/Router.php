@@ -16,8 +16,8 @@ class Router
     'deleteSite',
     'suspendSite',
     'unsuspendSite',
+    'showSiteCreateForm',
     'showSiteList',
-    'showCreateForm',
   ];
 
   private const _DEFAULT_ACTION = 'showSiteList';

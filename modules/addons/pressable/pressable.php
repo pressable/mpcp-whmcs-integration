@@ -4,12 +4,13 @@ declare(strict_types = 1);
 
 use Pressable\Whmcs\Admin\Router as AdminRouter;
 
-function pressable_ConfigOptions(): array
+function pressable_config(): array
 {
   return [
     'name' => 'Pressable',
     'description' => 'Communicate with the Pressable API',
-    'version' => '1.0',
+    'author' => 'Pressable',
+    'version' => '0.1',
     'fields' => [
       'pressable_client_id' => [
         'FriendlyName' => 'Pressable client_id',

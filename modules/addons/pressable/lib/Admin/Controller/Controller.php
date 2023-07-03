@@ -11,7 +11,8 @@ use Psr\Http\Message\ResponseInterface;
 abstract class Controller
 {
 
-  private Client $_api;
+  /** @var ?Client */
+  private $_api;
 
   public static function factory(string $action): self
   {

@@ -4,12 +4,13 @@ declare(strict_types = 1);
 
 namespace Pressable\Whmcs\Admin\Controller;
 
+use Pressable\Whmcs\Admin\Result\Result as BaseResult;
 use Pressable\Whmcs\Admin\Result\SiteCreateForm as Result;
 
 class ShowSiteCreateForm extends Controller
 {
 
-  public function __invoke(array $data, array $config): Result
+  public function __invoke(array $data, array $config): BaseResult
   {
     $api = $this->getApi($config);
     $options = [];

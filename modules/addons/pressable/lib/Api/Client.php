@@ -14,10 +14,20 @@ class Client
   private const _TIMEOUT = 30;
   private const _URL = 'https://my.pressable.com/v1/';
 
-  private string $token;
+  /** @var string */
+  private $id;
 
-  public function __construct(private string $id, private string $secret)
-  {}
+  /** @var string */
+  private $secret;
+
+  /** @var ?string */
+  private $token;
+
+  public function __construct(string $id, string $secret)
+  {
+    $this->id = $id;
+    $this->secret = $secret;
+  }
 
   public function datacenterList(): ResponseInterface
   {

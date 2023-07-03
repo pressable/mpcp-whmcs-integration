@@ -7,12 +7,17 @@ namespace Pressable\Whmcs\Admin\Result;
 class BadRequest implements Result
 {
 
-  public function __construct(private string $_message)
-  {}
+  /** @var string */
+  private $message;
+
+  public function __construct(string $message)
+  {
+    $this->message = $message;
+  }
 
   public function __toString(): string
   {
-    return $this->_message;
+    return $this->message;
   }
 
 }

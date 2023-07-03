@@ -7,8 +7,17 @@ namespace Pressable\Whmcs\Admin\Result;
 class SiteList implements Result
 {
 
-  public function __construct(private array $list, private array $pagination)
-  {}
+  /** @var array */
+  private $list;
+
+  /** @var array */
+  private $pagination;
+
+  public function __construct(array $list, array $pagination)
+  {
+    $this->list = $list;
+    $this->pagination = $pagination;
+  }
 
   private function getPagination(): string
   {

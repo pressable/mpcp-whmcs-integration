@@ -13,8 +13,17 @@ class SiteCreateForm implements Result
     'php_version' => 'PHP Version',
   ];
 
-  public function __construct(private array $options, private string $postUrl)
-  {}
+  /** @var array */
+  private $options;
+
+  /** @var string */
+  private $postUrl;
+
+  public function __construct(array $options, string $postUrl)
+  {
+    $this->options = $options;
+    $this->postUrl = $postUrl;
+  }
 
   private function generateOptions(string $name, string $display, array $options): string
   {
@@ -24,13 +33,13 @@ class SiteCreateForm implements Result
     }
 
     return <<<CONTENT
-        <label>
-          {$display}
-          <select name="{$name}">
-            {$opts}
-          </select>
-        </label>
-      CONTENT;
+  <label>
+    {$display}
+    <select name="{$name}">
+      {$opts}
+    </select>
+  </label>
+CONTENT;
   }
 
   public function __toString(): string
@@ -43,12 +52,12 @@ class SiteCreateForm implements Result
     }
 
     return <<<CONTENT
-        <form method="post" action="{$this->postUrl}">
-          <label>Name <input type="text" name="name" /></label>
-          <label><input type="checkbox" name="staging" value="true" /> Staging</label>
-          {$options}
-        </form>
-      CONTENT;
+  <form method="post" action="{$this->postUrl}">
+    <label>Name <input type="text" name="name" /></label>
+    <label><input type="checkbox" name="staging" value="true" /> Staging</label>
+    {$options}
+  </form>
+CONTENT;
   }
 
 }

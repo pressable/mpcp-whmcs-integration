@@ -25,7 +25,11 @@ class SiteList implements Result
 
   private function getPagination(): string
   {
-    if ($this->pagination['totalItems'] < 1 || empty($this->list)) {
+    if (
+      $this->pagination['totalItems'] < 1 ||
+      empty($this->list) ||
+      count($this->list) <= $this->pagination['totalItems']
+    ) {
       return '';
     }
 

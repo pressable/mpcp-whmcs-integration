@@ -39,6 +39,11 @@ class Client
     return $this->apiPut("sites/{$id}/disable");
   }
 
+  public function enableSite(string $id): ResponseInterface
+  {
+    return $this->apiPut("sites/{$id}/enable");
+  }
+
   public function siteInstallOptionList(): ResponseInterface
   {
     return $this->apiGet('sites/install-options');

@@ -23,6 +23,18 @@ class SiteList implements Result
     $this->postUrl = $postUrl;
   }
 
+  private function emptyResult(): string
+  {
+    return "<p>{$this->getAddButton()}</p><p>No Sites</p>";
+  }
+
+  private function getAddButton(): string
+  {
+    $url = "{$this->postUrl}&_action=showSiteCreateForm";
+
+    return "<a href=\"{$url}\"><button>Add a Site</button></a>";
+  }
+
   private function getCss(): string
   {
     return <<<'CONTENT'
@@ -128,11 +140,18 @@ CONTENT;
     </tr>';
   }
 
-  public function __toString(): string
+  private function tableResult(): string
   {
     $table = "<table>{$this->getTableHead()}{$this->getTableBody()}</table>";
 
-    return "{$this->getCss()}{$table}<p>{$this->getPagination()}</p>";
+    return "{$this->getCss()}<p>{$this->getAddButton()}</p>{$table}<p>{$this->getPagination()}</p>";
+  }
+
+  public function __toString(): string
+  {
+    return empty($this->list)
+      ? $this->emptyResult()
+      : $this->tableResult();
   }
 
 }

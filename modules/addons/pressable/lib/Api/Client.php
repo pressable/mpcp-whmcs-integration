@@ -29,6 +29,14 @@ class Client
     $this->secret = $secret;
   }
 
+  public function createSite(array $data): ResponseInterface
+  {
+    $whitelist = ['name', 'php_version', 'staging', 'install', 'datacenter_code'];
+    $data = array_intersect_key($data, array_flip($whitelist));
+
+    return $this->apiPost('sites', $data);
+  }
+
   public function datacenterList(): ResponseInterface
   {
     return $this->apiGet('sites/datacenters');
@@ -86,6 +94,16 @@ class Client
     }
 
     return $this->getConnection()->get($resource, $options);
+  }
+
+  private function apiPost(string $resource, ?array $data = null): ResponseInterface
+  {
+    $options = [];
+    if (! empty($data)) {
+      $options['json'] = $data;
+    }
+
+    return $this->getConnection()->post($resource, $options);
   }
 
   private function apiPut(string $resource, ?array $data = null): ResponseInterface

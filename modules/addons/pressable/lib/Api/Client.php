@@ -34,6 +34,11 @@ class Client
     return $this->apiGet('sites/datacenters');
   }
 
+  public function disableSite(string $id): ResponseInterface
+  {
+    return $this->apiPut("sites/{$id}/disable");
+  }
+
   public function siteInstallOptionList(): ResponseInterface
   {
     return $this->apiGet('sites/install-options');
@@ -66,6 +71,16 @@ class Client
     }
 
     return $this->getConnection()->get($resource, $options);
+  }
+
+  private function apiPut(string $resource, ?array $data = null): ResponseInterface
+  {
+    $options = [];
+    if (! empty($data)) {
+      $options['json'] = $data;
+    }
+
+    return $this->getConnection()->put($resource, $options);
   }
 
   private function getAuthToken(): string

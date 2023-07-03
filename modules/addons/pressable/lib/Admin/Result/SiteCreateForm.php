@@ -38,7 +38,7 @@ class SiteCreateForm implements Result
     <select name="{$name}">
       {$opts}
     </select>
-  </label>
+  </label><br />
 CONTENT;
   }
 
@@ -52,11 +52,12 @@ CONTENT;
     }
 
     return <<<CONTENT
-  <form method="post" action="{$this->postUrl}">
+  <form style="margin-bottom: 1em;" method="post" action="{$this->postUrl}">
     <input type="hidden" name="_action" value="createSite" />
-    <label>Name <input type="text" name="name" /></label>
-    <label><input type="checkbox" name="staging" value="true" /> Staging</label>
+    <label>Name <input type="text" name="name" /></label><br />
+    <label>Staging <input type="checkbox" name="staging" value="true" /></label><br />
     {$options}
+    <input type="submit" value="Create a Site" />
   </form>
 CONTENT;
   }

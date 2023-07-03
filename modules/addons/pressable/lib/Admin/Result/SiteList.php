@@ -23,6 +23,35 @@ class SiteList implements Result
     $this->postUrl = $postUrl;
   }
 
+  private function getCss(): string
+  {
+    return <<<'CONTENT'
+<style type="text/css">
+  table, th, td {
+    border: 2px solid #000;
+    border-collapse: collapse;
+  }
+  th, td {padding: .2em .5em;}
+  td form {display: inline;}
+</style>
+CONTENT;
+  }
+
+  private function getDeleteButton(array $item): string
+  {
+    if (! in_array($item['state'], ['live', 'disabled'])) {
+      return '';
+    }
+
+    return <<<CONTENT
+<form method="post" action="{$this->postUrl}">
+  <input type="hidden" name="_action" value="deleteSite" />
+  <input type="hidden" name="siteId" value="{$item['id']}" />
+  <input type="submit" title="Delete" value="&#128465;" />
+</form>
+CONTENT;
+  }
+
   private function getPagination(): string
   {
     if (
@@ -40,21 +69,6 @@ class SiteList implements Result
     $range = "{$first}-{$last}";
 
     return "Showing {$range} of {$this->pagination['totalItems']}";
-  }
-
-  private function getDeleteButton(array $item): string
-  {
-    if (! in_array($item['state'], ['live', 'disabled'])) {
-      return '';
-    }
-
-    return <<<CONTENT
-<form method="post" action="{$this->postUrl}">
-  <input type="hidden" name="_action" value="deleteSite" />
-  <input type="hidden" name="siteId" value="{$item['id']}" />
-  <input type="submit" title="Delete" value="&#128465;" />
-</form>
-CONTENT;
   }
 
   private function getStateButton(array $item): string
@@ -110,7 +124,7 @@ CONTENT;
       <th>IP</th>
       <th>Created</th>
       <th>State</th>
-      <th></th>
+      <th>Delete</th>
     </tr>';
   }
 
@@ -118,7 +132,7 @@ CONTENT;
   {
     $table = "<table>{$this->getTableHead()}{$this->getTableBody()}</table>";
 
-    return "{$table}<p>{$this->getPagination()}</p>";
+    return "{$this->getCss()}{$table}<p>{$this->getPagination()}</p>";
   }
 
 }

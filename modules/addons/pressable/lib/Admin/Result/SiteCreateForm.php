@@ -52,7 +52,7 @@ CONTENT;
     }
 
     return <<<CONTENT
-  <form style="margin-bottom: 1em;" method="post" action="{$this->postUrl}">
+  <form method="post" action="{$this->postUrl}">
     <input type="hidden" name="_action" value="createSite" />
     <label>Name <input type="text" name="name" /></label><br />
     <label>Staging <input type="checkbox" name="staging" value="true" /></label><br />

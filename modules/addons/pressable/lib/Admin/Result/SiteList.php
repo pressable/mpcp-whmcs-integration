@@ -46,7 +46,6 @@ class SiteList implements Result
     border-collapse: collapse;
   }
   th, td {padding: .2em .5em;}
-  td form {display: inline;}
 </style>
 CONTENT;
   }
@@ -104,7 +103,7 @@ CONTENT;
     }
 
     return <<<CONTENT
-<form method="post" action="{$this->postUrl}">
+<form style="float: right" method="post" action="{$this->postUrl}">
   <input type="hidden" name="_action" value="{$action}" />
   <input type="hidden" name="siteId" value="{$item['id']}" />
   <input type="submit" title="{$displayAction}" value="&#9212;" />
@@ -124,8 +123,11 @@ CONTENT;
         <td>{$item['datacenterCode']}</td>
         <td>{$item['ipAddress']}</td>
         <td>{$date->format('r')}</td>
-        <td>{$item['state']} {$this->getStateButton($item)}</td>
-        <td>{$this->getDeleteButton($item)}</td>
+        <td>
+          <span style=\"vertical-align: middle; margin-right: .5em;\">{$item['state']}</span>
+          {$this->getStateButton($item)}
+        </td>
+        <td style=\"text-align: center\">{$this->getDeleteButton($item)}</td>
       </tr>";
     }
 

@@ -24,7 +24,7 @@ class Router
 
   private function getAction(array $data): string
   {
-    return $data['action'] ?? self::_DEFAULT_ACTION;
+    return $data['_action'] ?? self::_DEFAULT_ACTION;
   }
 
   private function isValidAction(string $action): bool

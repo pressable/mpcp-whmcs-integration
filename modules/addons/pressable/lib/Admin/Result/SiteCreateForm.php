@@ -53,6 +53,7 @@ CONTENT;
 
     return <<<CONTENT
   <form method="post" action="{$this->postUrl}">
+    <input type="hidden" name="_action" value="createSite" />
     <label>Name <input type="text" name="name" /></label>
     <label><input type="checkbox" name="staging" value="true" /> Staging</label>
     {$options}

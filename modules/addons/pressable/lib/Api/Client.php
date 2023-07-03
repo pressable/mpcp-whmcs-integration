@@ -34,6 +34,11 @@ class Client
     return $this->apiGet('sites/datacenters');
   }
 
+  public function deleteSite(string $id): ResponseInterface
+  {
+    return $this->apiDelete("sites/{$id}");
+  }
+
   public function disableSite(string $id): ResponseInterface
   {
     return $this->apiPut("sites/{$id}/disable");
@@ -66,6 +71,11 @@ class Client
   public function phpVersionsList(): ResponseInterface
   {
     return $this->apiGet('sites/php-versions');
+  }
+
+  private function apiDelete(string $resource): ResponseInterface
+  {
+    return $this->getConnection()->delete($resource);
   }
 
   private function apiGet(string $resource, ?array $data = null): ResponseInterface

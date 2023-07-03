@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Pressable\Whmcs\Admin\Controller;
+namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 
-use Pressable\Whmcs\Admin\Result\Result as BaseResult;
-use Pressable\Whmcs\Admin\Result\SiteCreateForm as Result;
+use WHMCS\Module\Addon\Pressable\Admin\Result\Result as BaseResult;
+use WHMCS\Module\Addon\Pressable\Admin\Result\SiteCreateForm as Result;
 
 class ShowSiteCreateForm extends Controller
 {

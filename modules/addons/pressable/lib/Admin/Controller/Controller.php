@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Pressable\Whmcs\Admin\Controller;
+namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 
-use Pressable\Whmcs\Admin\Result\Result;
-use Pressable\Whmcs\Api\Client;
 use Psr\Http\Message\ResponseInterface;
+use WHMCS\Module\Addon\Pressable\Admin\Result\Result;
+use WHMCS\Module\Addon\Pressable\Api\Client;
 
 abstract class Controller
 {

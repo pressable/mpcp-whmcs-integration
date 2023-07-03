@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Pressable\Whmcs\Admin\Result;
+namespace WHMCS\Module\Addon\Pressable\Admin\Result;
 
-use Pressable\Whmcs\Admin\Router as AdminRouter;
+use WHMCS\Module\Addon\Pressable\Admin\Router as AdminRouter;
 
 class Redirect implements Result
 {

@@ -9,7 +9,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Pressable\\Whmcs\\": "modules/addons/pressable/lib/"
+      "WHMCS\\Module\\Addon\\Pressable\\": "modules/addons/pressable/lib/"
     }
   },
   "require-dev": {

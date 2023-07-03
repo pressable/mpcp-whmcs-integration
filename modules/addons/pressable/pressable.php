@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-use Pressable\Whmcs\Admin\Router as AdminRouter;
+use WHMCS\Module\Addon\Pressable\Admin\Router as AdminRouter;
 
 function pressable_config(): array
 {

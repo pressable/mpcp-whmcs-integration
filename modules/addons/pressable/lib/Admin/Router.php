@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Pressable\Whmcs\Admin;
+namespace WHMCS\Module\Addon\Pressable\Admin;
 
-use Pressable\Whmcs\Admin\Controller\Controller;
-use Pressable\Whmcs\Admin\Result\BadRequest;
-use Pressable\Whmcs\Admin\Result\Result;
+use WHMCS\Module\Addon\Pressable\Admin\Controller\Controller;
+use WHMCS\Module\Addon\Pressable\Admin\Result\BadRequest;
+use WHMCS\Module\Addon\Pressable\Admin\Result\Result;
 
 class Router
 {

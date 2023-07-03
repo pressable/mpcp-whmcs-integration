@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Pressable\Whmcs\Api;
+namespace WHMCS\Module\Addon\Pressable\Api;
 
 use GuzzleHttp\Client as Guzzle;
 use Psr\Http\Message\ResponseInterface;

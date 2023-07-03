@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Pressable\Whmcs\Admin\Result;
+namespace WHMCS\Module\Addon\Pressable\Admin\Result;
 
 class SiteList implements Result
 {

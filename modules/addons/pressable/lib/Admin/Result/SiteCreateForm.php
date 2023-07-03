@@ -27,7 +27,7 @@ class SiteCreateForm implements Result
 
   private function generateOptions(string $name, string $display, array $options): string
   {
-    $opts = '';
+    $opts = '<option selected value="">(use default)</option>';
     foreach ($options as $val => $show) {
       $opts .= "<option value=\"{$val}\">{$show}</option>";
     }

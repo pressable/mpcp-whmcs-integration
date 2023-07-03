@@ -15,7 +15,7 @@ class ShowSiteList extends Controller
     $response = $this->assertGoodResponse($this->getApi($config)->siteList($data));
     $body = json_decode($response->getBody()->getContents(), true);
 
-    return new Result($body['data'] ?? [], $body['page']);
+    return new Result($body['data'] ?? [], $body['page'], $config['modulelink']);
   }
 
 }

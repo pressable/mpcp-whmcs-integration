@@ -13,10 +13,14 @@ class SiteList implements Result
   /** @var array */
   private $pagination;
 
-  public function __construct(array $list, array $pagination)
+  /** @var string */
+  private $postUrl;
+
+  public function __construct(array $list, array $pagination, string $postUrl)
   {
     $this->list = $list;
     $this->pagination = $pagination;
+    $this->postUrl = $postUrl;
   }
 
   private function getPagination(): string
@@ -34,6 +38,48 @@ class SiteList implements Result
     return "Showing {$range} of {$this->pagination['totalItems']}";
   }
 
+  private function getDeleteButton(array $item): string
+  {
+    if (! in_array($item['state'], ['live', 'disabled'])) {
+      return '';
+    }
+
+    return <<<CONTENT
+<form method="post" action="{$this->postUrl}">
+  <input type="hidden" name="_action" value="deleteSite" />
+  <input type="hidden" name="siteId" value="{$item['id']}" />
+  <input type="submit" title="Delete" value="&#128465;" />
+</form>
+CONTENT;
+  }
+
+  private function getStateButton(array $item): string
+  {
+    $action = '';
+    $displayAction = '';
+
+    if ($item['state'] === 'live') {
+      $action = 'suspendSite';
+      $displayAction = 'Suspend';
+    }
+    if ($item['state'] === 'disabled') {
+      $action = 'unsuspendSite';
+      $displayAction = 'Unsuspend';
+    }
+
+    if (empty($action)) {
+      return '';
+    }
+
+    return <<<CONTENT
+<form method="post" action="{$this->postUrl}">
+  <input type="hidden" name="_action" value="{$action}" />
+  <input type="hidden" name="siteId" value="{$item['id']}" />
+  <input type="submit" title="{$displayAction}" value="&#9212;" />
+</form>
+CONTENT;
+  }
+
   private function getTableBody(): string
   {
     $rows = [];
@@ -44,8 +90,8 @@ class SiteList implements Result
         <td>{$item['datacenterCode']}</td>
         <td>{$item['ipAddress']}</td>
         <td>{$item['created']}</td>
-        <td>{$item['state']}</td>
-        <td></td>
+        <td>{$item['state']} {$this->getStateButton($item)}</td>
+        <td>{$this->getDeleteButton($item)}</td>
       </tr>";
     }
 

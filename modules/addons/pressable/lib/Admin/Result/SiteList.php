@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Admin\Result;
 
+use DateTimeImmutable;
+
 class SiteList implements Result
 {
 
@@ -115,11 +117,13 @@ CONTENT;
     $rows = [];
 
     foreach ($this->list as $item) {
+      $date = new DateTimeImmutable($item['created']);
+
       $rows[] = "<tr>
         <td>{$item['name']}</td>
         <td>{$item['datacenterCode']}</td>
         <td>{$item['ipAddress']}</td>
-        <td>{$item['created']}</td>
+        <td>{$date->format('r')}</td>
         <td>{$item['state']} {$this->getStateButton($item)}</td>
         <td>{$this->getDeleteButton($item)}</td>
       </tr>";

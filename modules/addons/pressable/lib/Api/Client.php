@@ -42,17 +42,17 @@ class Client
     return $this->apiGet('sites/datacenters');
   }
 
-  public function deleteSite(string $id): ResponseInterface
+  public function deleteSite(int $id): ResponseInterface
   {
     return $this->apiDelete("sites/{$id}");
   }
 
-  public function disableSite(string $id): ResponseInterface
+  public function disableSite(int $id): ResponseInterface
   {
     return $this->apiPut("sites/{$id}/disable");
   }
 
-  public function enableSite(string $id): ResponseInterface
+  public function enableSite(int $id): ResponseInterface
   {
     return $this->apiPut("sites/{$id}/enable");
   }

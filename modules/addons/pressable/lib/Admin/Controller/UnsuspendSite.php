@@ -12,7 +12,8 @@ class UnsuspendSite extends Controller
 
   public function __invoke(array $data, array $config): BaseResult
   {
-    $this->assertGoodResponse($this->getApi($config)->enableSite($data['siteId'] ?? ''));
+    $id = (int)($data['siteId'] ?? '');
+    $this->assertGoodResponse($this->getApi($config)->enableSite($id));
 
     return new Redirect('showSiteList', $data, $config);
   }

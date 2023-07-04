@@ -12,7 +12,8 @@ class SuspendSite extends Controller
 
   public function __invoke(array $data, array $config): BaseResult
   {
-    $this->assertGoodResponse($this->getApi($config)->disableSite($data['siteId'] ?? ''));
+    $id = (int)($data['siteId'] ?? '');
+    $this->assertGoodResponse($this->getApi($config)->disableSite($id));
 
     return new Redirect('showSiteList', $data, $config);
   }

@@ -12,7 +12,8 @@ class DeleteSite extends Controller
 
   public function __invoke(array $data, array $config): BaseResult
   {
-    $this->assertGoodResponse($this->getApi($config)->deleteSite($data['siteId'] ?? ''));
+    $id = (int)($data['siteId'] ?? '');
+    $this->assertGoodResponse($this->getApi($config)->deleteSite($id));
 
     return new Redirect('showSiteList', $data, $config);
   }

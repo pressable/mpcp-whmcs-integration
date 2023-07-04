@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace WHMCS\Module\Addon\Pressable\Admin\Result;
 
 use DateTimeImmutable;
-use WHMCS\Database\Capsule;
+use WHMCS\Module\Addon\Pressable\Api\Whmcs;
 
 class SiteList implements Result
 {
@@ -149,7 +149,7 @@ CONTENT;
     </tr>';
   }
 
-  private function getWhmcsClientIdFromTags(array $tags): ?string
+  private function getWhmcsClientIdFromTags(array $tags): ?int
   {
     $idTag = null;
     $prefix = 'whmcs.client.';
@@ -162,7 +162,7 @@ CONTENT;
     }
 
     return isset($idTag)
-      ? substr($idTag, strlen($prefix))
+      ? (int)substr($idTag, strlen($prefix))
       : null;
   }
 
@@ -170,10 +170,11 @@ CONTENT;
   {
     $id = $this->getWhmcsClientIdFromTags($site['tags']);
 
-    $client = Capsule::table('tblclients')->find($id);
+    $client = Whmcs::getClient($id);
 
     return empty($client->id)
       ? null
+      // @phpstan-ignore-next-line
       : "{$id}: {$client->firstname} {$client->lastname}";
   }
 

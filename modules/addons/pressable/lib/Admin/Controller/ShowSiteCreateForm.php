@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 
-use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\Pressable\Admin\Result\Result as BaseResult;
 use WHMCS\Module\Addon\Pressable\Admin\Result\SiteCreateForm as Result;
 use WHMCS\Module\Addon\Pressable\Api\Pressable as Api;
+use WHMCS\Module\Addon\Pressable\Api\Whmcs;
 
 class ShowSiteCreateForm extends Controller
 {
@@ -61,8 +61,7 @@ class ShowSiteCreateForm extends Controller
   {
     $list = [];
 
-    // @phpstan-ignore-next-line
-    foreach (Capsule::table('tblclients')->get() as $client) {
+    foreach (Whmcs::getClients() as $client) {
       $list[$client->id] = "{$client->firstname} {$client->lastname}";
     }
 

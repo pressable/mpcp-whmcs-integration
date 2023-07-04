@@ -1,0 +1,16 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Function add_hook not found\\.$#"
+			count: 1
+			path: modules/addons/pressable/hooks.php
+
+		-
+			message: "#^Call to method client\\(\\) on an unknown class WHMCS\\\\Authentication\\\\CurrentUser\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Api/PressableClientRestricted.php
+
+		-
+			message: "#^Instantiated class WHMCS\\\\Authentication\\\\CurrentUser not found\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Api/PressableClientRestricted.php

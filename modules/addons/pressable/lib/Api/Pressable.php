@@ -39,7 +39,7 @@ class Pressable
   public function createSite(array $data): ResponseInterface
   {
     $whitelist = ['name', 'php_version', 'staging', 'install', 'datacenter_code'];
-    $data = array_intersect_key($data, array_flip($whitelist));
+    $data = $this->whitelist($data, $whitelist);
 
     return $this->apiPost('sites', $data);
   }
@@ -71,14 +71,10 @@ class Pressable
 
   public function siteList(array $query): ResponseInterface
   {
-    $data = ['paginate' => true];
+    $whitelist = ['page', 'per_page', 'tag_name'];
 
-    if (isset($query['page'])) {
-      $data['page'] = $query['page'];
-    }
-    if (isset($query['per_page'])) {
-      $data['per_page'] = $query['per_page'];
-    }
+    $data = $this->whitelist($query, $whitelist);
+    $data['paginate'] = true;
 
     return $this->apiGet('sites', $data);
   }
@@ -167,6 +163,11 @@ class Pressable
     }
 
     return new Guzzle($options);
+  }
+
+  private function whitelist(array $data, array $whitelist): array
+  {
+    return array_intersect_key($data, array_flip($whitelist));
   }
 
 }

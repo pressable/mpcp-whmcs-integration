@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 use WHMCS\Module\Addon\Pressable\Admin\Router as AdminRouter;
+use WHMCS\Module\Addon\Pressable\Client\Router as ClientRouter;
 
 function pressable_config(): array
 {
@@ -24,6 +25,16 @@ function pressable_config(): array
       ],
     ],
   ];
+}
+
+function pressable_clientarea(array $config): array
+{
+  // phpcs:ignore
+  $data = array_merge($_POST, $_GET);
+
+  $result = (new ClientRouter())($data, $config);
+
+  return $result->toArray();
 }
 
 /**

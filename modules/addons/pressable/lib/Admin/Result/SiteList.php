@@ -170,6 +170,9 @@ CONTENT;
   private function getWhmcsClientName(array $site): ?string
   {
     $id = $this->getWhmcsClientIdFromTags($site['tags']);
+    if ($id < 1) {
+      return null;
+    }
 
     $client = Whmcs::getClient($id);
 

@@ -7,7 +7,7 @@ namespace WHMCS\Module\Addon\Pressable\Api;
 use GuzzleHttp\Client as Guzzle;
 use Psr\Http\Message\ResponseInterface;
 
-class Client
+class Pressable
 {
 
   private const _AUTH_URL = 'https://my.pressable.com/auth/token';

@@ -6,12 +6,12 @@ namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use WHMCS\Module\Addon\Pressable\Admin\Result\Result;
-use WHMCS\Module\Addon\Pressable\Api\Client;
+use WHMCS\Module\Addon\Pressable\Api\Pressable as Api;
 
 abstract class Controller
 {
 
-  /** @var ?Client */
+  /** @var ?Api */
   private $_api;
 
   public static function factory(string $action): self
@@ -30,10 +30,10 @@ abstract class Controller
     return $response;
   }
 
-  protected function getApi(array $config): Client
+  protected function getApi(array $config): Api
   {
     if (! isset($this->_api)) {
-      $this->_api = new Client($config['pressable_client_id'], $config['pressable_client_secret']);
+      $this->_api = new Api($config['pressable_client_id'], $config['pressable_client_secret']);
     }
 
     return $this->_api;

@@ -7,7 +7,7 @@ namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\Pressable\Admin\Result\Result as BaseResult;
 use WHMCS\Module\Addon\Pressable\Admin\Result\SiteCreateForm as Result;
-use WHMCS\Module\Addon\Pressable\Api\Client as Api;
+use WHMCS\Module\Addon\Pressable\Api\Pressable as Api;
 
 class ShowSiteCreateForm extends Controller
 {

@@ -15,7 +15,7 @@ class Router
     'createSite',
     'deleteSite',
     'showSiteCreateForm',
-    'showSiteDetails',
+    'showSite',
     'showSiteList',
   ];
 

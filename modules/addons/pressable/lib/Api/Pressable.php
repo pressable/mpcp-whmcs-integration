@@ -64,6 +64,11 @@ class Pressable
     return $this->apiPut("sites/{$id}/enable");
   }
 
+  public function getSite(int $id): ResponseInterface
+  {
+    return $this->apiGet("sites/{$id}");
+  }
+
   public function siteInstallOptionList(): ResponseInterface
   {
     return $this->apiGet('sites/install-options');
@@ -73,8 +78,10 @@ class Pressable
   {
     $whitelist = ['page', 'per_page', 'tag_name'];
 
-    $data = $this->whitelist($query, $whitelist);
-    $data['paginate'] = true;
+    $data = array_merge(
+      ['paginate' => true],
+      $this->whitelist($query, $whitelist)
+    );
 
     return $this->apiGet('sites', $data);
   }

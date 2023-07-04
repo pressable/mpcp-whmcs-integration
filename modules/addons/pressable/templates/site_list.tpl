@@ -13,7 +13,7 @@
       <td>{$item.datacenterCode}</td>
       <td>{$item.ipAddress}</td>
       <td>{$item.state}</td>
-      <td>{if $item.state == 'live' or $item.state == 'disabled'}{include file='./site_delete_button' siteId=$item.id url=$url}{/if}</td>
+      <td>{if $item.state == 'live' or $item.state == 'disabled'}{include file='./site_delete_button.tpl' siteId=$item.id url=$url}{/if}</td>
     </tr>
   {/foreach}
 </table>

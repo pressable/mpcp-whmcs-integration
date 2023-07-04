@@ -12,7 +12,13 @@ class CreateSite extends Controller
 
   public function __invoke(array $data, array $config): BaseResult
   {
-    $this->assertGoodResponse($this->getApi($config)->createSite($data));
+    $api = $this->getApi($config);
+
+    $response = $this->assertGoodResponse($api->createSite($data));
+    $body = json_decode($response->getBody()->getContents(), true);
+    $siteId = $body['data']['id'];
+
+    $api->addSiteTag((int)$siteId, "whmcs.client.{$data['client_id']}");
 
     return new Redirect('showSiteList', $data, $config);
   }

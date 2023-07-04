@@ -29,6 +29,11 @@ class Client
     $this->secret = $secret;
   }
 
+  public function addSiteTag(int $siteId, string $tag): ResponseInterface
+  {
+    return $this->apiPost("sites/{$siteId}/tags", ['tag_names' => [$tag]]);
+  }
+
   public function createSite(array $data): ResponseInterface
   {
     $whitelist = ['name', 'php_version', 'staging', 'install', 'datacenter_code'];

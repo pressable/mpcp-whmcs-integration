@@ -4,34 +4,83 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 
+use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\Pressable\Admin\Result\Result as BaseResult;
 use WHMCS\Module\Addon\Pressable\Admin\Result\SiteCreateForm as Result;
+use WHMCS\Module\Addon\Pressable\Api\Client as Api;
 
 class ShowSiteCreateForm extends Controller
 {
 
+  private function getOptionsDatacenter(Api $api): ?array
+  {
+    $list = [];
+
+    $response = $this->assertGoodResponse($api->datacenterList());
+    $body = json_decode($response->getBody()->getContents(), true);
+    foreach ($body['data'] ?? [] as $item) {
+      $list[$item['code']] = $item['name'];
+    }
+
+    return empty($list)
+      ? null
+      : $list;
+  }
+
+  private function getOptionsInstall(Api $api): ?array
+  {
+    $list = [];
+
+    $response = $this->assertGoodResponse($api->siteInstallOptionList());
+    $body = json_decode($response->getBody()->getContents(), true);
+    foreach ($body['data'] ?? [] as $item) {
+      $list[$item] = $item;
+    }
+
+    return empty($list)
+      ? null
+      : $list;
+  }
+
+  private function getOptionsPhpVersion(Api $api): ?array
+  {
+    $list = [];
+
+    $response = $this->assertGoodResponse($api->phpVersionsList());
+    $body = json_decode($response->getBody()->getContents(), true);
+    foreach ($body['data'] ?? [] as $item) {
+      $list[$item] = $item;
+    }
+
+    return empty($list)
+      ? null
+      : $list;
+  }
+
+  private function getOptionsClients(): ?array
+  {
+    $list = [];
+
+    // @phpstan-ignore-next-line
+    foreach (Capsule::table('tblclients')->get() as $client) {
+      $list[$client->id] = "{$client->firstname} {$client->lastname}";
+    }
+
+    return empty($list)
+      ? null
+      : $list;
+  }
+
   public function __invoke(array $data, array $config): BaseResult
   {
     $api = $this->getApi($config);
-    $options = [];
 
-    $response = $this->assertGoodResponse($api->datacenterList());
-    $datacentersResponse = json_decode($response->getBody()->getContents(), true);
-    foreach ($datacentersResponse['data'] ?? [] as $item) {
-      $options['datacenter_code'][$item['code']] = $item['name'];
-    }
-
-    $response = $this->assertGoodResponse($api->siteInstallOptionList());
-    $installOptionsResponse = json_decode($response->getBody()->getContents(), true);
-    foreach ($installOptionsResponse['data'] ?? [] as $item) {
-      $options['install'][$item] = $item;
-    }
-
-    $response = $this->assertGoodResponse($api->phpVersionsList());
-    $phpVersionsResponse = json_decode($response->getBody()->getContents(), true);
-    foreach ($phpVersionsResponse['data'] ?? [] as $item) {
-      $options['php_version'][$item] = $item;
-    }
+    $options = array_filter([
+      'datacenter_code' => $this->getOptionsDatacenter($api),
+      'install' => $this->getOptionsInstall($api),
+      'php_version' => $this->getOptionsPhpVersion($api),
+      'client_id' => $this->getOptionsClients(),
+    ]);
 
     return new Result($options, $config['modulelink']);
   }

@@ -101,7 +101,6 @@
   <rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
   <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion"/>
   <rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature"/>
-  <rule ref="SlevomatCodingStandard.Classes.RequireSingleLineMethodSignature"/>
   <rule ref="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming"/>
   <rule ref="SlevomatCodingStandard.Classes.SuperfluousErrorNaming"/>
   <rule ref="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming"/>

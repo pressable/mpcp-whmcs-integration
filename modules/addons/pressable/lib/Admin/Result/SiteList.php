@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace WHMCS\Module\Addon\Pressable\Admin\Result;
 
 use DateTimeImmutable;
+use WHMCS\Database\Capsule;
 
 class SiteList implements Result
 {
@@ -120,6 +121,7 @@ CONTENT;
 
       $rows[] = "<tr>
         <td>{$item['name']}</td>
+        <td>{$this->getWhmcsClientName($item)}</td>
         <td>{$item['datacenterCode']}</td>
         <td>{$item['ipAddress']}</td>
         <td>{$date->format('r')}</td>
@@ -138,12 +140,41 @@ CONTENT;
   {
     return '<tr>
       <th>Name</th>
+      <th>Client</th>
       <th>DC</th>
       <th>IP</th>
       <th>Created</th>
       <th>State</th>
       <th>Delete</th>
     </tr>';
+  }
+
+  private function getWhmcsClientIdFromTags(array $tags): ?string
+  {
+    $idTag = null;
+    $prefix = 'whmcs.client.';
+
+    foreach ($tags as $tag) {
+      if (strpos($tag['name'], $prefix) === 0) {
+        $idTag = $tag['name'];
+        break;
+      }
+    }
+
+    return isset($idTag)
+      ? substr($idTag, strlen($prefix))
+      : null;
+  }
+
+  private function getWhmcsClientName(array $site): ?string
+  {
+    $id = $this->getWhmcsClientIdFromTags($site['tags']);
+
+    $client = Capsule::table('tblclients')->find($id);
+
+    return empty($client->id)
+      ? null
+      : "{$id}: {$client->firstname} {$client->lastname}";
   }
 
   private function tableResult(): string

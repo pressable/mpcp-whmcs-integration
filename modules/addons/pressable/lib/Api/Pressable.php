@@ -10,6 +10,8 @@ use Psr\Http\Message\ResponseInterface;
 class Pressable
 {
 
+  public const SITE_TAG_CLIENT_PREFIX = 'whmcs.client.';
+
   private const _AUTH_URL = 'https://my.pressable.com/auth/token';
   private const _TIMEOUT = 30;
   private const _URL = 'https://my.pressable.com/v1/';

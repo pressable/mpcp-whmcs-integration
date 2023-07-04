@@ -6,6 +6,7 @@ namespace WHMCS\Module\Addon\Pressable\Admin\Controller;
 
 use WHMCS\Module\Addon\Pressable\Admin\Result\Redirect;
 use WHMCS\Module\Addon\Pressable\Admin\Result\Result as BaseResult;
+use WHMCS\Module\Addon\Pressable\Api\Pressable as Api;
 
 class CreateSite extends Controller
 {
@@ -18,7 +19,9 @@ class CreateSite extends Controller
     $body = json_decode($response->getBody()->getContents(), true);
     $siteId = $body['data']['id'];
 
-    $api->addSiteTag((int)$siteId, "whmcs.client.{$data['client_id']}");
+    $prefix = Api::SITE_TAG_CLIENT_PREFIX;
+
+    $api->addSiteTag((int)$siteId, "{$prefix}{$data['client_id']}");
 
     return new Redirect('showSiteList', $data, $config);
   }

@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace WHMCS\Module\Addon\Pressable\Admin\Result;
 
 use DateTimeImmutable;
+use WHMCS\Module\Addon\Pressable\Api\Pressable as Api;
 use WHMCS\Module\Addon\Pressable\Api\Whmcs;
 
 class SiteList implements Result
@@ -152,7 +153,7 @@ CONTENT;
   private function getWhmcsClientIdFromTags(array $tags): ?int
   {
     $idTag = null;
-    $prefix = 'whmcs.client.';
+    $prefix = Api::SITE_TAG_CLIENT_PREFIX;
 
     foreach ($tags as $tag) {
       if (strpos($tag['name'], $prefix) === 0) {

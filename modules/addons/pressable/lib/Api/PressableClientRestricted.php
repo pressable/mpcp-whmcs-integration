@@ -31,6 +31,11 @@ class PressableClientRestricted
     $this->client = (new CurrentUser())->client();
   }
 
+  public function createSite(array $data): ResponseInterface
+  {
+    return $this->api->createSite($data, $this->client->id);
+  }
+
   public function datacenterList(): ResponseInterface
   {
     return $this->api->datacenterList();

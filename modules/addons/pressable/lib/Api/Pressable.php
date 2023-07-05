@@ -36,12 +36,21 @@ class Pressable
     return $this->apiPost("sites/{$siteId}/tags", ['tag_names' => [$tag]]);
   }
 
-  public function createSite(array $data): ResponseInterface
+  public function createSite(array $data, int $clientId): ResponseInterface
   {
     $whitelist = ['name', 'php_version', 'staging', 'install', 'datacenter_code'];
     $data = $this->whitelist($data, $whitelist);
 
-    return $this->apiPost('sites', $data);
+    $response = $this->apiPost('sites', $data);
+    $body = json_decode($response->getBody()->getContents(), true) ?? [];
+
+    $siteId = (int)($body['data']['id'] ?? 0);
+    if ($siteId > 0) {
+      $prefix = self::SITE_TAG_CLIENT_PREFIX;
+      $this->addSiteTag($siteId, "{$prefix}{$clientId}");
+    }
+
+    return $response;
   }
 
   public function datacenterList(): ResponseInterface

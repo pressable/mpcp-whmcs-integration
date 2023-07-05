@@ -49,6 +49,7 @@ class ShowSiteList extends Controller
       ? null
       : $list;
   }
+
   private function getOptionsPhpVersion(Api $api): ?array
   {
     $list = [];

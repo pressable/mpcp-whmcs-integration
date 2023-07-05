@@ -12,8 +12,12 @@ class Router
 {
 
   private const _ACTIONS = [
+    'changePhpVersion',
     'createSite',
     'deleteSite',
+    'domainAdd',
+    'domainDelete',
+    'restoreFromBackup',
     'showSite',
     'showSiteList',
   ];

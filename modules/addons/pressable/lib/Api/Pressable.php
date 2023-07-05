@@ -68,6 +68,11 @@ class Pressable
     return $this->apiDelete("sites/{$id}");
   }
 
+  public function deleteSiteDomain(int $siteId, int $domainId): ResponseInterface
+  {
+    return $this->apiDelete("sites/{$siteId}/domains/{$domainId}");
+  }
+
   public function disableSite(int $id): ResponseInterface
   {
     return $this->apiPut("sites/{$id}/disable");

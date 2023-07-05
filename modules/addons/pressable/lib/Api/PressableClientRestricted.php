@@ -55,6 +55,13 @@ class PressableClientRestricted
     return $this->api->deleteSite($id);
   }
 
+  public function deleteSiteDomain(int $siteId, int $domainId): ResponseInterface
+  {
+    $this->assertSiteRestriction($siteId);
+
+    return $this->api->deleteSiteDomain($siteId, $domainId);
+  }
+
   public function getSite(int $id): ResponseInterface
   {
     $this->assertSiteRestriction($id);

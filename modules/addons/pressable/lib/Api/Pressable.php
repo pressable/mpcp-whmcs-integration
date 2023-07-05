@@ -31,6 +31,11 @@ class Pressable
     $this->secret = $secret;
   }
 
+  public function addSiteDomain(int $siteId, string $domain): ResponseInterface
+  {
+    return $this->apiPost("sites/{$siteId}/domains", ['name' => $domain]);
+  }
+
   public function addSiteTag(int $siteId, string $tag): ResponseInterface
   {
     return $this->apiPost("sites/{$siteId}/tags", ['tag_names' => [$tag]]);

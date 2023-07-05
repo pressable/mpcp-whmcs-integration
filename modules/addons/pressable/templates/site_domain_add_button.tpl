@@ -10,7 +10,7 @@
 <button id="pressable-add-site-domain-button" onclick="toggleSiteDomainAddForm()">Add a Domain</button>
 <div id="pressable-add-site-domain-form" style="display: none">
   <form method="post" action="{$url}">
-    <input type="hidden" name="_action" value="addSiteDomain" />
+    <input type="hidden" name="_action" value="domainAdd" />
     <input type="hidden" name="siteId" value="{$siteId}" />
 
     <label>Domain <input type="text" name="name" required /></label><br />

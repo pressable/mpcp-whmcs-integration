@@ -31,6 +31,13 @@ class PressableClientRestricted
     $this->client = (new CurrentUser())->client();
   }
 
+  public function addSiteDomain(int $siteId, string $domain): ResponseInterface
+  {
+    $this->assertSiteRestriction($siteId);
+
+    return $this->api->addSiteDomain($siteId, $domain);
+  }
+
   public function createSite(array $data): ResponseInterface
   {
     return $this->api->createSite($data, $this->client->id);

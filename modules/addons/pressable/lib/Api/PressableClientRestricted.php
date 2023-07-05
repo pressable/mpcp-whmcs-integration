@@ -41,6 +41,13 @@ class PressableClientRestricted
     return $this->api->datacenterList();
   }
 
+  public function deleteSite(int $id): ResponseInterface
+  {
+    $this->assertSiteRestriction($id);
+
+    return $this->api->deleteSite($id);
+  }
+
   public function getSite(int $id): ResponseInterface
   {
     $this->assertSiteRestriction($id);

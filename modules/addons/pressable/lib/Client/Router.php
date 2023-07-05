@@ -14,7 +14,6 @@ class Router
   private const _ACTIONS = [
     'createSite',
     'deleteSite',
-    'showSiteCreateForm',
     'showSite',
     'showSiteList',
   ];

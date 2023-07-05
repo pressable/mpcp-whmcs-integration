@@ -69,6 +69,16 @@ class Pressable
     return $this->apiGet("sites/{$id}");
   }
 
+  public function getSiteBackups(int $id): ResponseInterface
+  {
+    return $this->apiGet("sites/{$id}/backups");
+  }
+
+  public function getSiteDomains(int $id): ResponseInterface
+  {
+    return $this->apiGet("sites/{$id}/domains");
+  }
+
   public function siteInstallOptionList(): ResponseInterface
   {
     return $this->apiGet('sites/install-options');

@@ -8,6 +8,9 @@ class SiteList implements Result
 {
 
   /** @var array */
+  private $createOptions;
+
+  /** @var array */
   private $list;
 
   /** @var array */
@@ -16,11 +19,17 @@ class SiteList implements Result
   /** @var string */
   private $postUrl;
 
-  public function __construct(array $list, array $pagination, string $postUrl)
+  public function __construct(
+    array $list,
+    array $pagination,
+    string $postUrl,
+    array $createOptions = []
+  )
   {
     $this->list = $list;
     $this->pagination = $pagination;
     $this->postUrl = $postUrl;
+    $this->createOptions = $createOptions;
   }
 
   public function toArray(): array
@@ -33,6 +42,7 @@ class SiteList implements Result
         'list' => $this->list,
         'pagination' => $this->pagination,
         'url' => $this->postUrl,
+        'createOptions' => $this->createOptions,
       ],
     ];
   }

@@ -31,6 +31,11 @@ class PressableClientRestricted
     $this->client = (new CurrentUser())->client();
   }
 
+  public function datacenterList(): ResponseInterface
+  {
+    return $this->api->datacenterList();
+  }
+
   public function getSite(int $id): ResponseInterface
   {
     $this->assertSiteRestriction($id);
@@ -38,11 +43,35 @@ class PressableClientRestricted
     return $this->api->getSite($id);
   }
 
+  public function getSiteBackups(int $id): ResponseInterface
+  {
+    $this->assertSiteRestriction($id);
+
+    return $this->api->getSiteBackups($id);
+  }
+
+  public function getSiteDomains(int $id): ResponseInterface
+  {
+    $this->assertSiteRestriction($id);
+
+    return $this->api->getSiteDomains($id);
+  }
+
+  public function phpVersionsList(): ResponseInterface
+  {
+    return $this->api->phpVersionsList();
+  }
+
   public function siteList(array $query): ResponseInterface
   {
     $query['tag_name'] = Pressable::SITE_TAG_CLIENT_PREFIX . $this->client->id;
 
     return $this->api->siteList($query);
+  }
+
+  public function siteInstallOptionList(): ResponseInterface
+  {
+    return $this->api->siteInstallOptionList();
   }
 
   private function assertSiteRestriction(int $id): void

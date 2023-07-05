@@ -1,4 +1,4 @@
-<p>{include file='./site_add_button.tpl' url=$url}</p>
+<p>{include file='./site_add_button.tpl' url=$url phpVersions=$createOptions.phpVersions datacenters=$createOptions.datacenters installOptions=$createOptions.installOptions}</p>
 <table>
   <tr>
     <th>Name</th>

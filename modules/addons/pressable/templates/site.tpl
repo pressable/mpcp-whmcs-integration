@@ -1,7 +1,7 @@
 <p>
   {$site.name} ({$site.state})<br />
   {$site.ipAddress} {$site.datacenterName}<br />
-  PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$siteId url=$url currentVersion=$site.phpVersion versions=$phpVersions}
+  PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}
 </p>
 
 <hr />

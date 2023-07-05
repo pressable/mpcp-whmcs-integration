@@ -86,6 +86,13 @@ class PressableClientRestricted
     return $this->api->siteInstallOptionList();
   }
 
+  public function updateSite(int $siteId, array $data): ResponseInterface
+  {
+    $this->assertSiteRestriction($siteId);
+
+    return $this->api->updateSite($siteId, $data);
+  }
+
   private function assertSiteRestriction(int $id): void
   {
     if (! in_array($id, $this->getClientSiteIds())) {

@@ -10,10 +10,10 @@
 <button id="pressable-change-php-version-button" onclick="togglePhpVersionForm()">&#8644;</button>
 <div id="pressable-change-php-version-form" style="display: none">
   <form method="post" action="{$url}">
-    <input type="hidden" name="_action" value="changePhpVersion" />
+    <input type="hidden" name="_action" value="updateSite" />
     <input type="hidden" name="siteId" value="{$siteId}" />
 
-    <select name="version">
+    <select name="php_version">
       {foreach from=$versions item=item}
         <option value="{$item}" {if $item == $currentVersion}selected disabled{/if}>{$item}</option>
       {/foreach}

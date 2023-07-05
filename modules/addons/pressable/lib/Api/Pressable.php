@@ -110,6 +110,11 @@ class Pressable
     return $this->apiGet('sites/php-versions');
   }
 
+  public function updateSite(int $siteId, array $data): ResponseInterface
+  {
+    return $this->apiPut("sites/{$siteId}", $data);
+  }
+
   private function apiDelete(string $resource): ResponseInterface
   {
     return $this->getConnection()->delete($resource);

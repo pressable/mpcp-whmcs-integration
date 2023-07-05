@@ -12,7 +12,6 @@ class Router
 {
 
   private const _ACTIONS = [
-    'changePhpVersion',
     'createSite',
     'deleteSite',
     'domainAdd',
@@ -20,6 +19,7 @@ class Router
     'restoreFromBackup',
     'showSite',
     'showSiteList',
+    'updateSite',
   ];
 
   private const _DEFAULT_ACTION = 'showSiteList';

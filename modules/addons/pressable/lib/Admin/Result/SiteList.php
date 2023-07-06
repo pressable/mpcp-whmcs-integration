@@ -36,20 +36,7 @@ class SiteList implements Result
   {
     $url = "{$this->postUrl}&_action=showSiteCreateForm";
 
-    return "<a href=\"{$url}\"><button>Add a Site</button></a>";
-  }
-
-  private function getCss(): string
-  {
-    return <<<'CONTENT'
-<style type="text/css">
-  table, th, td {
-    border: 2px solid #000;
-    border-collapse: collapse;
-  }
-  th, td {padding: .2em .5em;}
-</style>
-CONTENT;
+    return "<a href=\"{$url}\"><button class=\"btn btn-info\">Add a Site</button></a>";
   }
 
   private function getDeleteButton(array $item): string
@@ -62,7 +49,7 @@ CONTENT;
 <form method="post" action="{$this->postUrl}">
   <input type="hidden" name="_action" value="deleteSite" />
   <input type="hidden" name="siteId" value="{$item['id']}" />
-  <input type="submit" title="Delete" value="&#128465;" />
+  <input class="btn btn-danger" type="submit" title="Delete" value="Delete" />
 </form>
 CONTENT;
   }
@@ -105,10 +92,10 @@ CONTENT;
     }
 
     return <<<CONTENT
-<form style="float: right" method="post" action="{$this->postUrl}">
+<form method="post" action="{$this->postUrl}">
   <input type="hidden" name="_action" value="{$action}" />
   <input type="hidden" name="siteId" value="{$item['id']}" />
-  <input type="submit" title="{$displayAction}" value="&#9212;" />
+  <input class="btn btn-warning" type="submit" value="{$displayAction}" />
 </form>
 CONTENT;
   }
@@ -119,6 +106,9 @@ CONTENT;
 
     foreach ($this->list as $item) {
       $date = new DateTimeImmutable($item['created']);
+      $label = $item['state'] === 'live'
+        ? 'active'
+        : 'suspended';
 
       $rows[] = "<tr>
         <td>{$item['name']}</td>
@@ -126,11 +116,9 @@ CONTENT;
         <td>{$item['datacenterCode']}</td>
         <td>{$item['ipAddress']}</td>
         <td>{$date->format('r')}</td>
-        <td>
-          <span style=\"vertical-align: middle; margin-right: .5em;\">{$item['state']}</span>
-          {$this->getStateButton($item)}
-        </td>
-        <td style=\"text-align: center\">{$this->getDeleteButton($item)}</td>
+        <td class=\"text-center\"><span class=\"label {$label}\">{$item['state']}</span></td>
+        <td class=\"text-center\">{$this->getStateButton($item)}</td>
+        <td class=\"text-center\">{$this->getDeleteButton($item)}</td>
       </tr>";
     }
 
@@ -146,6 +134,7 @@ CONTENT;
       <th>IP</th>
       <th>Created</th>
       <th>State</th>
+      <th>Action</th>
       <th>Delete</th>
     </tr>';
   }
@@ -184,9 +173,11 @@ CONTENT;
 
   private function tableResult(): string
   {
-    $table = "<table>{$this->getTableHead()}{$this->getTableBody()}</table>";
+    $table = '<div class="tablebg"><table class="datatable table table-list">' .
+      $this->getTableHead() . $this->getTableBody() .
+      '</table></div>';
 
-    return "{$this->getCss()}<p>{$this->getAddButton()}</p>{$table}<p>{$this->getPagination()}</p>";
+    return "<p>{$this->getAddButton()}</p>{$table}<p>{$this->getPagination()}</p>";
   }
 
   public function __toString(): string

@@ -47,33 +47,49 @@ class SiteCreateForm implements Result
       : 'required';
 
     return <<<CONTENT
-  <label>
-    {$display}
-    <select {$required} name="{$name}">
-      {$opts}
-    </select>
-  </label><br />
+  <tr>
+    <td class="fieldlabel">{$display}</td>
+    <td class="fieldarea">
+      <select class="form-control select-inline" {$required} name="{$name}">{$opts}</select>
+    </td>
+  </tr>
 CONTENT;
+  }
+
+  private function getSelectElements(): string
+  {
+    $output = '';
+
+    foreach (self::_OPTIONS as $name => $display) {
+      if (isset($this->options[$name])) {
+        $includeDefault = $name !== 'client_id';
+        $output .= $this->generateOptions($name, $display, $this->options[$name], $includeDefault);
+      }
+    }
+
+    return $output;
   }
 
   public function __toString(): string
   {
-    $options = '';
-    foreach (self::_OPTIONS as $name => $display) {
-      if (isset($this->options[$name])) {
-        $includeDefault = $name !== 'client_id';
-        $options .= $this->generateOptions($name, $display, $this->options[$name], $includeDefault);
-      }
-    }
-
     return <<<CONTENT
   <form method="post" action="{$this->postUrl}">
     <input type="hidden" name="_action" value="createSite" />
-    <label>Name <input required type="text" name="name" /></label><br />
-    <label>Staging <input type="checkbox" name="staging" value="true" /></label><br />
-    {$options}
-    <input type="submit" value="Create Site" />
-    <a href="{$this->postUrl}"><button type="button">Cancel</button></a>
+    <table class="form" width="100%">
+      <tr>
+        <td class="fieldlabel">Name</td>
+        <td class="fieldarea"><input required type="text" name="name" /></td>
+      </tr>
+      <tr>
+        <td class="fieldlabel">Staging</td>
+        <td class="fieldarea"><input type="checkbox" name="staging" value="true" /></td>
+      </tr>
+      {$this->getSelectElements()}
+    </table>
+    <div class="btn-container">
+      <input class="btn btn-primary" type="submit" value="Create Site" />
+      <a href="{$this->postUrl}"><button class="btn btn-secondary" type="button">Cancel</button></a>
+    </div>
   </form>
 CONTENT;
   }

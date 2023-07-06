@@ -10,7 +10,13 @@
     </tr>
     {foreach from=$list item=item}
       <tr>
-        <td><a href="{$url}&_action=showSite&siteId={$item.id}">{$item.name}</a>{if $item.staging} (staging){/if}</td>
+        <td>
+          {if $item.state == 'live' || $item.state == 'disabled'}
+            <a href="{$url}&_action=showSite&siteId={$item.id}">{$item.name}</a>
+          {else}
+            {$item.name}
+          {/if}
+          {if $item.staging} (staging){/if}</td>
         <td>{$item.datacenterCode}</td>
         <td>{$item.ipAddress}</td>
         <td><span class="badge {if $item.state == 'live'}badge-success{/if} {if $item.state == 'disabled'}badge-warning{/if} {if $item.state != 'live' && $item.state != 'disabled'}badge-secondary{/if}">{$item.state}</span></td>

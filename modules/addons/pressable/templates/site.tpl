@@ -1,6 +1,7 @@
 <p>
-  {$site.name} ({$site.state})<br />
-  {$site.ipAddress} {$site.datacenterName}<br />
+  {$site.name} ({$site.state}){if $site.staging} STAGING{/if}<br />
+  {$site.datacenterName}<br />
+  IPS: {$site.ipAddressOne} | {$site.ipAddressTwo}<br />
   PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}
   {include file="./reset_wordpress_password_button.tpl" siteId=$site.id}
 </p>
@@ -55,3 +56,16 @@
 {else}
   <h4>None</h4>
 {/if}
+
+<hr />
+
+<h2>Nameservers</h2>
+<p>
+  <code>
+    ns1.openhostingservice.com<br />
+    ns2.openhostingservice.com<br />
+    ns3.openhostingservice.com<br />
+    ns4.openhostingservice.com<br />
+    ns5.openhostingservice.com
+  </code>
+</p>

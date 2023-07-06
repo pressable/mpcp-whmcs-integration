@@ -120,6 +120,11 @@ class Pressable
     return $this->apiGet('sites/php-versions');
   }
 
+  public function resetWpPassword(int $siteId): ResponseInterface
+  {
+    return $this->apiPut("sites/{$siteId}/wordpress/password-reset");
+  }
+
   public function updateSite(int $siteId, array $data): ResponseInterface
   {
     return $this->apiPut("sites/{$siteId}", $data);

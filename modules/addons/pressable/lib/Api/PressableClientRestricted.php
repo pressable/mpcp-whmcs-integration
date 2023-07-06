@@ -88,6 +88,13 @@ class PressableClientRestricted
     return $this->api->phpVersionsList();
   }
 
+  public function resetWpPassword(int $siteId): ResponseInterface
+  {
+    $this->assertSiteRestriction($siteId);
+
+    return $this->api->resetWpPassword($siteId);
+  }
+
   public function siteList(array $query): ResponseInterface
   {
     $query['tag_name'] = Pressable::SITE_TAG_CLIENT_PREFIX . $this->client->id;

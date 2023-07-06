@@ -16,6 +16,7 @@ class Router
     'deleteSite',
     'domainAdd',
     'domainDelete',
+    'resetWpPassword',
     'restoreFromBackup',
     'showSite',
     'showSiteList',

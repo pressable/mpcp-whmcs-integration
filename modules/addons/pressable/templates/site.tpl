@@ -3,6 +3,8 @@
   {$site.datacenterName}<br />
   IPS: {$site.ipAddressOne} | {$site.ipAddressTwo}<br />
   PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}
+</p>
+<p>
   {include file="./reset_wordpress_password_button.tpl" siteId=$site.id}
 </p>
 
@@ -10,8 +12,8 @@
 
 <h2>Domains</h2>
 
-{if $domains}
-  <table>
+<div class="tablebg">
+  <table class="datatable table table-list">
     <tr>
       <th>Name</th>
       <th>Delete</th>
@@ -21,23 +23,23 @@
         <td>{$item.domainName}</td>
         <td>{include file='./site_domain_delete_button.tpl' siteId=$site.id domainId=$item.id url=$url}</td>
       </tr>
+    {foreachelse}
+      <tr><td class="text-center" colspan="2">None</td></tr>
     {/foreach}
   </table>
-{else}
-  <h4>None</h4>
-{/if}
+</div>
 
 <p>{include file="./site_domain_add_button.tpl" siteId=$site.id url=$url}</p>
 
 <hr />
 
 <h2>Backups</h2>
-{if $backups}
-  <table>
+<div class="tablebg">
+  <table class="datatable table table-list">
     <tr>
       <th>Timestamp</th>
-      <th>Restore Files</th>
-      <th>Restore Database</th>
+      <th class="text-center">Restore Files</th>
+      <th class="text-center">Restore Database</th>
       <th></th>
     </tr>
     {foreach from=$backups item=item}
@@ -46,16 +48,16 @@
           <input type="hidden" name="_action" value="restoreBackup" />
           <input type="hidden" name="siteId" value="{$site.id}" />
           <td>{$item.timestamp}</td>
-          <td><input type="checkbox" name="filesystem_id" value="{$item.filesystemBackupId}" /></td>
-          <td><input type="checkbox" name="database_id" value="{$item.databaseBackupId}" /></td>
-          <td><input type="submit" title="Restore From Backup" value="&#9100;" /></td>
+          <td class="text-center"><input type="checkbox" name="filesystem_id" value="{$item.filesystemBackupId}" /></td>
+          <td class="text-center"><input type="checkbox" name="database_id" value="{$item.databaseBackupId}" /></td>
+          <td class="text-center"><input class="btn btn-warning" type="submit" title="Restore From Backup" value="Restore" /></td>
         </form>
       </tr>
+    {foreachelse}
+      <tr><td class="text-center" colspan="4">None</td></tr>
     {/foreach}
   </table>
-{else}
-  <h4>None</h4>
-{/if}
+</div>
 
 <hr />
 

@@ -37,7 +37,7 @@ class SiteList implements Result
     return [
       'breadcrumb' => ['index.php?m=pressable' => 'Manage Sites'],
       'requirelogin' => true,
-      'templatefile' => empty($this->list) ? 'site_list_empty' : 'site_list',
+      'templatefile' => 'site_list',
       'vars' => [
         'list' => $this->list,
         'pagination' => $this->pagination,

@@ -54,6 +54,18 @@ class SiteList implements Result
 CONTENT;
   }
 
+  private function getLabel(string $state): string
+  {
+    switch ($state) {
+      case 'live':
+        return 'active';
+      case 'disabled':
+        return 'pending';
+      default:
+        return 'suspended';
+    }
+  }
+
   private function getPagination(): string
   {
     if (
@@ -106,9 +118,6 @@ CONTENT;
 
     foreach ($this->list as $item) {
       $date = new DateTimeImmutable($item['created']);
-      $label = $item['state'] === 'live'
-        ? 'active'
-        : 'suspended';
 
       $rows[] = "<tr>
         <td>{$item['name']}</td>
@@ -116,7 +125,9 @@ CONTENT;
         <td>{$item['datacenterCode']}</td>
         <td>{$item['ipAddress']}</td>
         <td>{$date->format('r')}</td>
-        <td class=\"text-center\"><span class=\"label {$label}\">{$item['state']}</span></td>
+        <td class=\"text-center\">
+          <span class=\"label {$this->getLabel($item['state'])}\">{$item['state']}</span>
+        </td>
         <td class=\"text-center\">{$this->getStateButton($item)}</td>
         <td class=\"text-center\">{$this->getDeleteButton($item)}</td>
       </tr>";

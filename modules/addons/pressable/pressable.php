@@ -11,7 +11,7 @@ function pressable_config(): array
     'name' => 'Pressable',
     'description' => 'Communicate with the Pressable API',
     'author' => 'Pressable',
-    'version' => '0.1',
+    'version' => '1.0',
     'fields' => [
       'pressable_client_id' => [
         'FriendlyName' => 'Pressable client_id',

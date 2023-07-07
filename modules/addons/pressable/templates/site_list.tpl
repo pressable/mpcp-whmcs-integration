@@ -26,4 +26,5 @@
       <tr><td class="text-center" colspan="5">None</td></tr>
     {/foreach}
   </table>
+  <p>{include file='./pagination.tpl' url=$url pagination=$pagination number=$list|@count}</p>
 </div>

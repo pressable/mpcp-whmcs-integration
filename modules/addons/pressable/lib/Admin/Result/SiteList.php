@@ -71,7 +71,7 @@ CONTENT;
     if (
       $this->pagination['totalItems'] < 1 ||
       empty($this->list) ||
-      count($this->list) <= $this->pagination['totalItems']
+      count($this->list) >= $this->pagination['totalItems']
     ) {
       return '';
     }
@@ -81,8 +81,37 @@ CONTENT;
     $last = min($last, $this->pagination['totalItems']);
 
     $range = "{$first}-{$last}";
+    $buttons = "{$this->getPaginationPreviousButton()} {$this->getPaginationNextButton()}";
 
-    return "Showing {$range} of {$this->pagination['totalItems']}";
+    return "Showing {$range} of {$this->pagination['totalItems']} {$buttons}";
+  }
+
+  private function getPaginationNextButton(): ?string
+  {
+    $next = $this->pagination['nextPage'] ?? null;
+    if (empty($next)) {
+      return null;
+    }
+
+    $url = "{$this->postUrl}&page={$next}";
+
+    return <<<CONTENT
+  <a href="{$url}"><button class="btn btn-sm btn-light">Next</button></a>
+CONTENT;
+  }
+
+  private function getPaginationPreviousButton(): ?string
+  {
+    $prev = ($this->pagination['currentPage'] ?? 1) - 1;
+    if ($prev <= 0) {
+      return null;
+    }
+
+    $url = "{$this->postUrl}&page={$prev}";
+
+    return <<<CONTENT
+  <a href="{$url}"><button class="btn btn-sm btn-light">Prev</button></a>
+CONTENT;
   }
 
   private function getStateButton(array $item): string

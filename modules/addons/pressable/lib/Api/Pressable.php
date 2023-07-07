@@ -203,6 +203,7 @@ class Pressable
       'base_uri' => self::_URL,
       'connect_timeout' => self::_TIMEOUT,
       'timeout' => self::_TIMEOUT,
+      'http_errors' => false,
     ];
     if ($withHeaders) {
       $options['headers'] = $this->getRequestHeaders();

@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace WHMCS\Module\Addon\Pressable\Client\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use WHMCS\Module\Addon\Pressable\Api\Error\Pressable as PressableError;
 use WHMCS\Module\Addon\Pressable\Api\PressableClientRestricted as Api;
 use WHMCS\Module\Addon\Pressable\Client\Result\Result;
 
@@ -32,8 +33,8 @@ abstract class Controller
 
   protected function assertGoodResponse(ResponseInterface $response): ResponseInterface
   {
-    if ($response->getStatusCode() >= 300) {
-      // todo: throw exception
+    if ($response->getStatusCode() >= 400) {
+      throw PressableError::fromResponse($response);
     }
 
     return $response;

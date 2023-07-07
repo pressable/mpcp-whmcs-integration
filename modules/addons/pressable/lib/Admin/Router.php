@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Admin;
 
+use Throwable;
 use WHMCS\Module\Addon\Pressable\Admin\Controller\Controller;
 use WHMCS\Module\Addon\Pressable\Admin\Result\BadRequest;
 use WHMCS\Module\Addon\Pressable\Admin\Result\Result;
@@ -41,7 +42,11 @@ class Router
 
     $controller = Controller::factory($action);
 
-    return $controller($data, $config);
+    try {
+      return $controller($data, $config);
+    } catch (Throwable $e) {
+      return BadRequest::fromError($e);
+    }
   }
 
 }

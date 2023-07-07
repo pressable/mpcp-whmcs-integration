@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Client\Result;
 
+use Throwable;
+use WHMCS\Module\Addon\Pressable\Api\Error\Pressable as PressableError;
+
 class BadRequest implements Result
 {
 
@@ -13,6 +16,15 @@ class BadRequest implements Result
   public function __construct(string $message)
   {
     $this->message = $message;
+  }
+
+  public static function fromError(Throwable $e): self
+  {
+    $message = ($e instanceof PressableError)
+      ? $e->getMessage()
+      : '';
+
+    return new self($message);
   }
 
   public function toArray(): array

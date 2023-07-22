@@ -39,10 +39,16 @@ class ShowSiteList extends Controller
   {
     $list = [];
 
+    $display = static function ($item) {
+      $item = str_replace('wordpress', 'WordPress', $item);
+
+      return ucfirst($item);
+    };
+
     $response = $this->assertGoodResponse($api->siteInstallOptionList());
     $body = json_decode($response->getBody()->getContents(), true);
     foreach ($body['data'] ?? [] as $item) {
-      $list[$item] = $item;
+      $list[$item] = $display($item);
     }
 
     return empty($list)

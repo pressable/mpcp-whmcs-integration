@@ -18,7 +18,10 @@
           {/if}
           {if $item.staging} (staging){/if}</td>
         <td>{$item.datacenterCode}</td>
-        <td>{$item.ipAddress}</td>
+        <td>
+          {$item.ipAddressOne}<br />
+          {$item.ipAddressTwo}
+        </td>
         <td><span class="badge {if $item.state == 'live'}badge-success{/if} {if $item.state == 'disabled'}badge-warning{/if} {if $item.state != 'live' && $item.state != 'disabled'}badge-secondary{/if}">{$item.state}</span></td>
         <td>{if $item.state == 'live' or $item.state == 'disabled'}{include file='./site_delete_button.tpl' siteId=$item.id url=$url}{/if}</td>
       </tr>

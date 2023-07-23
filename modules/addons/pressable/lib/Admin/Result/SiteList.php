@@ -152,7 +152,10 @@ CONTENT;
         <td>{$item['name']}</td>
         <td>{$this->getWhmcsClientName($item)}</td>
         <td>{$item['datacenterCode']}</td>
-        <td>{$item['ipAddress']}</td>
+        <td>
+          {$item['ipAddressOne']}<br />
+          {$item['ipAddressTwo']}
+        </td>
         <td>{$date->format('r')}</td>
         <td class=\"text-center\">
           <span class=\"label {$this->getLabel($item['state'])}\">{$item['state']}</span>

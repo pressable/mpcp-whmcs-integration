@@ -151,7 +151,7 @@ CONTENT;
       $rows[] = "<tr>
         <td>{$item['name']}</td>
         <td>{$this->getWhmcsClientName($item)}</td>
-        <td>{$item['datacenterCode']}</td>
+        <td>{$item['datacenterName']}</td>
         <td>
           {$item['ipAddressOne']}<br />
           {$item['ipAddressTwo']}

@@ -3,7 +3,7 @@
   <table class="table table-list">
     <tr>
       <th>Name</th>
-      <th>DC</th>
+      <th>Location</th>
       <th>IP</th>
       <th>State</th>
       <th>Delete</th>
@@ -17,7 +17,7 @@
             {$item.name}
           {/if}
           {if $item.staging} (staging){/if}</td>
-        <td>{$item.datacenterCode}</td>
+        <td>{$item.datacenterName}</td>
         <td>
           {$item.ipAddressOne}<br />
           {$item.ipAddressTwo}

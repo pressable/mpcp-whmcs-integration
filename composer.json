@@ -1,7 +1,7 @@
 {
   "config": {
     "platform": {
-      "php": "7.2"
+      "php": "7.2.5"
     },
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
@@ -30,6 +30,7 @@
     "fix:style": "./vendor/bin/phpcbf modules"
   },
   "require": {
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "7.0.1",
+    "firebase/php-jwt": "5.2.0"
   }
 }

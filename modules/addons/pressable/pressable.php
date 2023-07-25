@@ -5,6 +5,7 @@ declare(strict_types = 1);
 use WHMCS\Module\Addon\Pressable\Admin\Router as AdminRouter;
 use WHMCS\Module\Addon\Pressable\Client\Router as ClientRouter;
 
+// phpcs:ignore
 function pressable_config(): array
 {
   return [
@@ -22,6 +23,12 @@ function pressable_config(): array
         'FriendlyName' => 'Pressable client_secret',
         'Type' => 'password',
         'Description' => 'See https://my.pressable.com/api/applications',
+      ],
+      'tokenizer_key' => [
+        'FriendlyName' => 'Tokenizer Key',
+        'Type' => 'text',
+        'Description' => 'Advanced setting. Just keep the default value.',
+        'Default' => md5(microtime()),
       ],
     ],
   ];

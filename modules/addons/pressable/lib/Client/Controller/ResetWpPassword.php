@@ -17,7 +17,7 @@ class ResetWpPassword extends Controller
     $response = $this->assertGoodResponse($this->getApi($config)->resetWpPassword($id));
     $password = json_decode($response->getBody()->getContents(), true)['data'];
 
-    return new Result($password);
+    return new Result($password, $config['service']);
   }
 
 }

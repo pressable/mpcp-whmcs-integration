@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Client\Result;
 
+use WHMCS\Module\Addon\Pressable\Client\Service;
+
 class Site implements Result
 {
 
@@ -19,6 +21,9 @@ class Site implements Result
   /** @var string */
   private $postUrl;
 
+  /** @var ?Service */
+  private $service;
+
   /** @var array */
   private $site;
 
@@ -27,7 +32,8 @@ class Site implements Result
     array $domains,
     array $backups,
     array $phpVersions,
-    string $postUrl
+    string $postUrl,
+    ?Service $service
   )
   {
     $this->site = $site;
@@ -35,15 +41,21 @@ class Site implements Result
     $this->backups = $backups;
     $this->phpVersions = $phpVersions;
     $this->postUrl = $postUrl;
+    $this->service = $service;
   }
 
   public function toArray(): array
   {
+    $breadcrumbs = [];
+    if (isset($this->service)) {
+      $breadcrumbs = [
+        "clientarea.php?action=productdetails&id={$this->service->getId()}" => 'Service',
+      ];
+    }
+    $breadcrumbs[''] = $this->site['name'];
+
     return [
-      'breadcrumb' => [
-        'index.php?m=pressable' => 'Manage Sites',
-        "index.php?m=pressable&_action=showSite&siteId={$this->site['id']}" => $this->site['name'],
-      ],
+      'breadcrumb' => $breadcrumbs,
       'requirelogin' => true,
       'templatefile' => 'site',
       'vars' => [

@@ -42,7 +42,14 @@ class ShowSite extends Controller
 
     $phpVersions = $this->getOptionsPhpVersion($api);
 
-    return new Result($site, $domains, $backups, $phpVersions, $config['modulelink']);
+    return new Result(
+      $site,
+      $domains,
+      $backups,
+      $phpVersions,
+      $config['modulelink'],
+      $config['service']
+    );
   }
 
 }

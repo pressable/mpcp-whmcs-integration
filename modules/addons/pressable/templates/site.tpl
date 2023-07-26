@@ -48,8 +48,8 @@
           <input type="hidden" name="_action" value="restoreBackup" />
           <input type="hidden" name="siteId" value="{$site.id}" />
           <td>{$item.timestamp}</td>
-          <td class="text-center"><input type="checkbox" name="filesystem_id" value="{$item.filesystemBackupId}" /></td>
-          <td class="text-center"><input type="checkbox" name="database_id" value="{$item.databaseBackupId}" /></td>
+          <td class="text-center"><input type="checkbox" name="filesystem_id" {if empty($item.filesystemBackupId)}disabled{/if} value="{$item.filesystemBackupId}" /></td>
+          <td class="text-center"><input type="checkbox" name="database_id" {if empty($item.databaseBackupId)}disabled{/if} value="{$item.databaseBackupId}" /></td>
           <td class="text-center"><input class="btn btn-warning" type="submit" title="Restore From Backup" value="Restore" /></td>
         </form>
       </tr>

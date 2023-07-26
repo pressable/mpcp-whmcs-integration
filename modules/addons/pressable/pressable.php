@@ -2,7 +2,6 @@
 
 declare(strict_types = 1);
 
-use WHMCS\Module\Addon\Pressable\Admin\Router as AdminRouter;
 use WHMCS\Module\Addon\Pressable\Client\Router as ClientRouter;
 
 // phpcs:ignore
@@ -49,10 +48,5 @@ function pressable_clientarea(array $config): array
  */
 function pressable_output(array $config): void
 {
-  // phpcs:ignore
-  $data = array_merge($_POST, $_GET);
-
-  $result = (new AdminRouter())($data, $config);
-
-  echo $result;
+  echo 'Manage a client\'s sites by "Login as Client" from the client profile page';
 }

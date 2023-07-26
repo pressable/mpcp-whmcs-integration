@@ -6,9 +6,34 @@ parameters:
 			path: modules/addons/pressable/lib/Api/PressableClientRestricted.php
 
 		-
+			message: "#^Call to method isMasqueradingAdmin\\(\\) on an unknown class WHMCS\\\\Authentication\\\\CurrentUser\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Api/PressableClientRestricted.php
+
+		-
 			message: "#^Instantiated class WHMCS\\\\Authentication\\\\CurrentUser not found\\.$#"
 			count: 1
 			path: modules/addons/pressable/lib/Api/PressableClientRestricted.php
+
+		-
+			message: "#^Call to method isMasqueradingAdmin\\(\\) on an unknown class WHMCS\\\\Authentication\\\\CurrentUser\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Client/Controller/ShowSiteList.php
+
+		-
+			message: "#^Instantiated class WHMCS\\\\Authentication\\\\CurrentUser not found\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Client/Controller/ShowSiteList.php
+
+		-
+			message: "#^Call to method isMasqueradingAdmin\\(\\) on an unknown class WHMCS\\\\Authentication\\\\CurrentUser\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Client/Router.php
+
+		-
+			message: "#^Instantiated class WHMCS\\\\Authentication\\\\CurrentUser not found\\.$#"
+			count: 1
+			path: modules/addons/pressable/lib/Client/Router.php
 
 		-
 			message: "#^Call to static method where\\(\\) on an unknown class WHMCS\\\\Module\\\\Addon\\\\Setting\\.$#"

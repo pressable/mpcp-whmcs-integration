@@ -12,6 +12,9 @@ class SiteList implements Result
   /** @var array */
   private $createOptions;
 
+  /** @var bool */
+  private $isAdmin = false;
+
   /** @var array */
   private $list;
 
@@ -28,6 +31,7 @@ class SiteList implements Result
     array $list,
     array $pagination,
     string $postUrl,
+    bool $isAdmin = false,
     ?Service $service = null,
     array $createOptions = []
   )
@@ -35,6 +39,7 @@ class SiteList implements Result
     $this->list = $list;
     $this->pagination = $pagination;
     $this->postUrl = $postUrl;
+    $this->isAdmin = $isAdmin;
     $this->service = $service;
     $this->createOptions = $createOptions;
   }
@@ -58,6 +63,7 @@ class SiteList implements Result
         'pagination' => $this->pagination,
         'url' => $this->postUrl,
         'createOptions' => $this->createOptions,
+        'isAdmin' => $this->isAdmin,
       ],
     ];
   }

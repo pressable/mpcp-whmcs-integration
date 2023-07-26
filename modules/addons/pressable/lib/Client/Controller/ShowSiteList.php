@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Client\Controller;
 
+use WHMCS\Authentication\CurrentUser;
 use WHMCS\Module\Addon\Pressable\Api\PressableClientRestricted as Api;
 use WHMCS\Module\Addon\Pressable\Client\Result\Result as BaseResult;
 use WHMCS\Module\Addon\Pressable\Client\Result\SiteList as Result;
@@ -78,10 +79,13 @@ class ShowSiteList extends Controller
     $response = $this->assertGoodResponse($api->siteList($data));
     $body = json_decode($response->getBody()->getContents(), true);
 
+    $isAdmin = (new CurrentUser())->isMasqueradingAdmin();
+
     return new Result(
       $body['data'] ?? [],
       $body['page'],
       $this->getPostUrl($data, $config),
+      $isAdmin,
       $config['service'],
       $this->getSiteCreateOptions($api)
     );

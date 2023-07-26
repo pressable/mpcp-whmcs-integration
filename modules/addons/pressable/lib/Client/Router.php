@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace WHMCS\Module\Addon\Pressable\Client;
 
 use Throwable;
+use WHMCS\Authentication\CurrentUser;
 use WHMCS\Module\Addon\Pressable\Client\Controller\Controller;
 use WHMCS\Module\Addon\Pressable\Client\Result\BadRequest;
 use WHMCS\Module\Addon\Pressable\Client\Result\Result;
@@ -22,7 +23,14 @@ class Router
     'restoreFromBackup',
     'showSite',
     'showSiteList',
+    'suspendSite',
+    'unsuspendSite',
     'updateSite',
+  ];
+
+  private const _ADMIN_ACTIONS = [
+    'suspendSite',
+    'unsuspendSite',
   ];
 
   private const _DEFAULT_ACTION = 'showSiteList';
@@ -32,7 +40,17 @@ class Router
     return $data['_action'] ?? self::_DEFAULT_ACTION;
   }
 
-  private function isValidAction(string $action): bool
+  private function isAdmin(): bool
+  {
+    return (new CurrentUser())->isMasqueradingAdmin();
+  }
+
+  private function isAdminAction(string $action): bool
+  {
+    return in_array($action, self::_ADMIN_ACTIONS);
+  }
+
+  private function isValidAction(?string $action): bool
   {
     return in_array($action, self::_ACTIONS);
   }
@@ -59,6 +77,9 @@ class Router
     }
 
     $action = $this->getAction($data);
+    if ($this->isAdminAction($action) && ! $this->isAdmin()) {
+      $action = null;
+    }
     if (! $this->isValidAction($action)) {
       return new BadRequest('Invalid Action', $config['service']);
     }

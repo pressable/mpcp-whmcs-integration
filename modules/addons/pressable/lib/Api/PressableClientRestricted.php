@@ -26,14 +26,20 @@ class PressableClientRestricted
   /** @var ?array */
   private $client_site_ids;
 
+  /** @var bool */
+  private $isAdmin = false;
+
   /** @var ?Service */
   private $service;
 
   public function __construct(string $id, string $secret, ?Service $service = null)
   {
     $this->api = new Pressable($id, $secret);
-    $this->client = (new CurrentUser())->client();
     $this->service = $service;
+
+    $user = new CurrentUser();
+    $this->client = $user->client();
+    $this->isAdmin = $user->isMasqueradingAdmin();
   }
 
   public function addSiteDomain(int $siteId, string $domain): ResponseInterface
@@ -65,6 +71,22 @@ class PressableClientRestricted
     $this->assertSiteRestriction($siteId);
 
     return $this->api->deleteSiteDomain($siteId, $domainId);
+  }
+
+  public function disableSite(int $id): ResponseInterface
+  {
+    $this->assertAdmin();
+    $this->assertSiteRestriction($id);
+
+    return $this->api->disableSite($id);
+  }
+
+  public function enableSite(int $id): ResponseInterface
+  {
+    $this->assertAdmin();
+    $this->assertSiteRestriction($id);
+
+    return $this->api->enableSite($id);
   }
 
   public function getSite(int $id): ResponseInterface
@@ -124,6 +146,13 @@ class PressableClientRestricted
     $this->assertSiteRestriction($siteId);
 
     return $this->api->updateSite($siteId, $data);
+  }
+
+  private function assertAdmin(): void
+  {
+    if (! $this->isAdmin) {
+      throw new Exception('Denied');
+    }
   }
 
   private function assertSiteRestriction(int $id): void

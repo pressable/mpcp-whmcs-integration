@@ -15,7 +15,7 @@ class DeleteSite extends Controller
     $id = (int)($data['siteId'] ?? '');
     $this->assertGoodResponse($this->getApi($config)->deleteSite($id));
 
-    return new Redirect('showSiteList', [], $config);
+    return new Redirect('showSiteList', $this->getRedirectData($data), $config);
   }
 
 }

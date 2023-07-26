@@ -29,7 +29,10 @@ class UpdateSite extends Controller
     // wait for the api to catch up
     sleep(1);
 
-    return new Redirect('showSite', ['siteId' => $id], $config);
+    $data = $this->getRedirectData($data);
+    $data['siteId'] = $id;
+
+    return new Redirect('showSite', $data, $config);
   }
 
 }

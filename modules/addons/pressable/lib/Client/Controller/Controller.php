@@ -44,6 +44,18 @@ abstract class Controller
     return $response;
   }
 
+  protected function getPostUrl(array $data, array $config): string
+  {
+    $token = $data['service'] ?? '';
+
+    return "{$config['modulelink']}&service={$token}";
+  }
+
+  protected function getRedirectData(array $data): array
+  {
+    return ['service' => $data['service'] ?? ''];
+  }
+
   abstract public function __invoke(array $data, array $config): Result;
 
 }

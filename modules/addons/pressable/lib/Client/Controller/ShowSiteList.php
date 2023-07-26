@@ -81,7 +81,7 @@ class ShowSiteList extends Controller
     return new Result(
       $body['data'] ?? [],
       $body['page'],
-      $config['modulelink'],
+      $this->getPostUrl($data, $config),
       $config['service'],
       $this->getSiteCreateOptions($api)
     );

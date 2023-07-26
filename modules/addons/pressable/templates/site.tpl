@@ -5,7 +5,7 @@
   PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}
 </p>
 <p>
-  {include file="./reset_wordpress_password_button.tpl" siteId=$site.id}
+  {include file="./reset_wordpress_password_button.tpl" siteId=$site.id url=$url}
 </p>
 
 <hr />

@@ -14,7 +14,7 @@ class CreateSite extends Controller
   {
     $this->assertGoodResponse($this->getApi($config)->createSite($data));
 
-    return new Redirect('showSiteList', [], $config);
+    return new Redirect('showSiteList', $this->getRedirectData($data), $config);
   }
 
 }

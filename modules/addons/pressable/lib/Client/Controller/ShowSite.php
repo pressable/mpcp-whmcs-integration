@@ -47,7 +47,7 @@ class ShowSite extends Controller
       $domains,
       $backups,
       $phpVersions,
-      $config['modulelink'],
+      $this->getPostUrl($data, $config),
       $config['service']
     );
   }

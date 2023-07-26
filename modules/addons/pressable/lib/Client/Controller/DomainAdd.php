@@ -17,7 +17,10 @@ class DomainAdd extends Controller
 
     $this->assertGoodResponse($this->getApi($config)->addSiteDomain($id, $domain));
 
-    return new Redirect('showSite', ['siteId' => $id], $config);
+    $data = $this->getRedirectData($data);
+    $data['siteId'] = $id;
+
+    return new Redirect('showSite', $data, $config);
   }
 
 }

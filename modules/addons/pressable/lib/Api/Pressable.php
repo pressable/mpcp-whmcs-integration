@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace WHMCS\Module\Addon\Pressable\Api;
 
+use Exception;
 use GuzzleHttp\Client as Guzzle;
 use Psr\Http\Message\ResponseInterface;
 
@@ -127,6 +128,17 @@ class Pressable
   public function resetWpPassword(int $siteId): ResponseInterface
   {
     return $this->apiPut("sites/{$siteId}/wordpress/password-reset");
+  }
+
+  public function restoreBackups(int $siteId, array $backups): ResponseInterface
+  {
+    $whitelist = ['filesystem_id', 'database_id'];
+    $backups = $this->whitelist($backups, $whitelist);
+    if (empty($backups)) {
+      throw new Exception('Specify Backups to Restore');
+    }
+
+    return $this->apiPost("sites/{$siteId}/restores", $backups);
   }
 
   public function updateSite(int $siteId, array $data): ResponseInterface

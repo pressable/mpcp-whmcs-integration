@@ -100,6 +100,13 @@ class PressableClientRestricted
     return $this->api->resetWpPassword($siteId);
   }
 
+  public function restoreBackups(int $siteId, array $backups): ResponseInterface
+  {
+    $this->assertSiteRestriction($siteId);
+
+    return $this->api->restoreBackups($siteId, $backups);
+  }
+
   public function siteList(array $query): ResponseInterface
   {
     $query['tag_name'] = Pressable::SITE_TAG_SERVICE_PREFIX . $this->getServiceId();

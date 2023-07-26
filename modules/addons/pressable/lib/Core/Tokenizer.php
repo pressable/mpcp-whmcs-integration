@@ -35,20 +35,13 @@ class Tokenizer
 
   public function toToken($subject): string
   {
-    $now = time();
     $data = [
       'sub' => json_encode($subject),
-      'iat' => $now,
-      'exp' => $this->getExpiration($now),
+      'iat' => time(),
+      'ver' => 1,
     ];
 
     return JWT::encode($data, $this->key, self::SCHEME);
-  }
-
-  private function getExpiration(int $now): int
-  {
-    // arbitrary 7 days
-    return $now + (86400 * 7);
   }
 
 }

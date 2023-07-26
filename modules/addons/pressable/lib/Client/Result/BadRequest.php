@@ -37,7 +37,7 @@ class BadRequest implements Result
     $breadcrumbs = [];
     if (isset($this->service)) {
       $breadcrumbs = [
-        "clientarea.php?action=productdetails&id={$this->service->getId()}" => 'Service',
+        "clientarea.php?action=productdetails&id={$this->service->getId()}" => 'Product Details',
       ];
     }
     $breadcrumbs[''] = 'Error';

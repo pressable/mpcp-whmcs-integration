@@ -11,6 +11,7 @@ class Pressable
 {
 
   public const SITE_TAG_CLIENT_PREFIX = 'whmcs.client.';
+  public const SITE_TAG_SERVICE_PREFIX = 'whmcs.service.';
 
   private const _AUTH_URL = 'https://my.pressable.com/auth/token';
   private const _TIMEOUT = 30;
@@ -41,7 +42,7 @@ class Pressable
     return $this->apiPost("sites/{$siteId}/tags", ['tag_names' => [$tag]]);
   }
 
-  public function createSite(array $data, int $clientId): ResponseInterface
+  public function createSite(array $data, int $clientId, int $serviceId): ResponseInterface
   {
     $whitelist = ['name', 'php_version', 'staging', 'install', 'datacenter_code'];
     $data = $this->whitelist($data, $whitelist);
@@ -53,6 +54,9 @@ class Pressable
     if ($siteId > 0) {
       $prefix = self::SITE_TAG_CLIENT_PREFIX;
       $this->addSiteTag($siteId, "{$prefix}{$clientId}");
+
+      $prefix = self::SITE_TAG_SERVICE_PREFIX;
+      $this->addSiteTag($siteId, "{$prefix}{$serviceId}");
     }
 
     return $response;

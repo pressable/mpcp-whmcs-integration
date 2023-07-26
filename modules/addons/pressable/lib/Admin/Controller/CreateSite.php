@@ -12,7 +12,9 @@ class CreateSite extends Controller
 
   public function __invoke(array $data, array $config): BaseResult
   {
-    $this->assertGoodResponse($this->getApi($config)->createSite($data, (int)$data['client_id']));
+    $this->assertGoodResponse(
+      $this->getApi($config)->createSite($data, (int)$data['client_id'], (int)$data['service_id'])
+    );
 
     return new Redirect('showSiteList', $data, $config);
   }

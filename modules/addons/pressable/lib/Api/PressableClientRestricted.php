@@ -7,6 +7,7 @@ namespace WHMCS\Module\Addon\Pressable\Api;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use WHMCS\Authentication\CurrentUser;
+use WHMCS\Module\Addon\Pressable\Client\Service;
 
 /**
  * A client restricted interface to the Pressable API
@@ -25,10 +26,14 @@ class PressableClientRestricted
   /** @var ?array */
   private $client_site_ids;
 
-  public function __construct(string $id, string $secret)
+  /** @var ?Service */
+  private $service;
+
+  public function __construct(string $id, string $secret, ?Service $service = null)
   {
     $this->api = new Pressable($id, $secret);
     $this->client = (new CurrentUser())->client();
+    $this->service = $service;
   }
 
   public function addSiteDomain(int $siteId, string $domain): ResponseInterface
@@ -40,7 +45,7 @@ class PressableClientRestricted
 
   public function createSite(array $data): ResponseInterface
   {
-    return $this->api->createSite($data, $this->client->id);
+    return $this->api->createSite($data, $this->client->id, $this->getServiceId());
   }
 
   public function datacenterList(): ResponseInterface
@@ -97,7 +102,7 @@ class PressableClientRestricted
 
   public function siteList(array $query): ResponseInterface
   {
-    $query['tag_name'] = Pressable::SITE_TAG_CLIENT_PREFIX . $this->client->id;
+    $query['tag_name'] = Pressable::SITE_TAG_SERVICE_PREFIX . $this->getServiceId();
 
     return $this->api->siteList($query);
   }
@@ -121,10 +126,17 @@ class PressableClientRestricted
     }
   }
 
+  private function clientSiteList(array $query): ResponseInterface
+  {
+    $query['tag_name'] = Pressable::SITE_TAG_CLIENT_PREFIX . $this->client->id;
+
+    return $this->api->siteList($query);
+  }
+
   private function getClientSiteIds(): array
   {
     if (! isset($this->client_site_ids)) {
-      $response = $this->siteList(['paginate' => false]);
+      $response = $this->clientSiteList(['paginate' => false]);
       $body = json_decode($response->getBody()->getContents(), true);
       $list = $body['data'] ?? [];
 
@@ -134,6 +146,19 @@ class PressableClientRestricted
     }
 
     return $this->client_site_ids;
+  }
+
+  private function getServiceId(): int
+  {
+    $id = isset($this->service)
+        ? $this->service->getId()
+        : 0;
+
+    if ($id <= 0) {
+      throw new Exception('Service Required');
+    }
+
+    return $id;
   }
 
 }

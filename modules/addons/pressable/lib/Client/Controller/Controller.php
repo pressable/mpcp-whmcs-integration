@@ -18,7 +18,11 @@ abstract class Controller
   final protected function getApi(array $config): Api
   {
     if (! isset($this->_api)) {
-      $this->_api = new Api($config['pressable_client_id'], $config['pressable_client_secret']);
+      $this->_api = new Api(
+        $config['pressable_client_id'],
+        $config['pressable_client_secret'],
+        $config['service'] ?? null
+      );
     }
 
     return $this->_api;

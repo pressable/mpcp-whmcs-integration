@@ -68,6 +68,16 @@ class Pressable
     return $this->apiGet('sites/datacenters');
   }
 
+  public function deleteAllSites(string $tag): void
+  {
+    $response = $this->siteList(['tag_name' => $tag]);
+    $body = json_decode($response->getBody()->getContents(), true);
+
+    foreach ($body['data'] ?? [] as $site) {
+      $this->deleteSite($site['id']);
+    }
+  }
+
   public function deleteSite(int $id): ResponseInterface
   {
     return $this->apiDelete("sites/{$id}");

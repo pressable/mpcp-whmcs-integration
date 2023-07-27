@@ -9,6 +9,9 @@ use WHMCS\Module\Addon\Pressable\Client\Service;
 class SiteList implements Result
 {
 
+  /** @var bool */
+  private $canAddSite = false;
+
   /** @var array */
   private $createOptions;
 
@@ -32,6 +35,7 @@ class SiteList implements Result
     array $pagination,
     string $postUrl,
     bool $isAdmin = false,
+    bool $canAddSite = false,
     ?Service $service = null,
     array $createOptions = []
   )
@@ -40,6 +44,7 @@ class SiteList implements Result
     $this->pagination = $pagination;
     $this->postUrl = $postUrl;
     $this->isAdmin = $isAdmin;
+    $this->canAddSite = $canAddSite;
     $this->service = $service;
     $this->createOptions = $createOptions;
   }
@@ -64,6 +69,7 @@ class SiteList implements Result
         'url' => $this->postUrl,
         'createOptions' => $this->createOptions,
         'isAdmin' => $this->isAdmin,
+        'canAddSite' => $this->canAddSite,
       ],
     ];
   }

@@ -7,6 +7,7 @@ namespace WHMCS\Module\Addon\Pressable\Api;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use WHMCS\Authentication\CurrentUser;
+use WHMCS\Module\Addon\Pressable\Api\Error\Pressable as PressableError;
 use WHMCS\Module\Addon\Pressable\Client\Service;
 
 /**
@@ -127,6 +128,19 @@ class PressableClientRestricted
     $this->assertSiteRestriction($siteId);
 
     return $this->api->restoreBackups($siteId, $backups);
+  }
+
+  public function siteCount(): int
+  {
+    $query = ['paginate' => true, 'per_page' => 0];
+    $response = $this->siteList($query);
+    if ($response->getStatusCode() >= 400) {
+      throw PressableError::fromResponse($response);
+    }
+
+    $body = json_decode($response->getBody()->getContents(), true);
+
+    return (int)($body['page']['totalItems']);
   }
 
   public function siteList(array $query): ResponseInterface

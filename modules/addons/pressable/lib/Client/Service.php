@@ -40,7 +40,7 @@ class Service
 
   public function isAtSiteLimit(int $number): bool
   {
-    return ($this->options['sites'] ?? 0) >= $number;
+    return $number >= ($this->options['sites'] ?? 0);
   }
 
   public function toArray(): array

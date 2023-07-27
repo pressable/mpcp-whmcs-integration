@@ -7,7 +7,7 @@
 {/literal}
 </script>
 
-<button class="btn btn-info" id="pressable-site-create-button" onclick="toggleSiteCreateForm()">Add Site</button>
+<button class="btn btn-info" id="pressable-site-create-button" {if $disabled}disabled{else}onclick="toggleSiteCreateForm()"{/if}>Add Site</button>
 <div id="pressable-site-create-form" style="display: none">
   <form method="post" action="{$url}">
     <input type="hidden" name="_action" value="createSite" />

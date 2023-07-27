@@ -75,18 +75,23 @@ class ShowSiteList extends Controller
   public function __invoke(array $data, array $config): BaseResult
   {
     $api = $this->getApi($config);
+    $service = $config['service'];
 
     $response = $this->assertGoodResponse($api->siteList($data));
     $body = json_decode($response->getBody()->getContents(), true);
 
     $isAdmin = (new CurrentUser())->isMasqueradingAdmin();
 
+    $siteCount = $this->getApi($config)->siteCount();
+    $canAdd = ! $service->isAtSiteLimit($siteCount);
+
     return new Result(
       $body['data'] ?? [],
       $body['page'],
       $this->getPostUrl($data, $config),
       $isAdmin,
-      $config['service'],
+      $canAdd,
+      $service,
       $this->getSiteCreateOptions($api)
     );
   }

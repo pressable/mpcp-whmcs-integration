@@ -24,6 +24,13 @@ class CreateSite extends Controller
   public function __invoke(array $data, array $config): BaseResult
   {
     $this->assertCanAddSite($config);
+
+    $data['name'] = preg_replace(
+      ['(\s+)', '([^a-zA-Z0-9-])'],
+      ['-', ''],
+      $data['name']
+    );
+
     $this->assertGoodResponse($this->getApi($config)->createSite($data));
 
     return new Redirect('showSiteList', $this->getRedirectData($data), $config);

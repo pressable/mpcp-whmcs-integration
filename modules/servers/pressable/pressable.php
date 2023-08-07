@@ -46,3 +46,10 @@ function pressable_ClientArea(array $data)
     ],
   ];
 }
+
+function pressable_CreateAccount(array $data)
+{
+  // Nothing to do
+  // WHMCS expects this function to be defined and to return the following
+  return 'success';
+}

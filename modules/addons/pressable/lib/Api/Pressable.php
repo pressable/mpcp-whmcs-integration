@@ -93,9 +93,35 @@ class Pressable
     return $this->apiPut("sites/{$id}/disable");
   }
 
+  public function disableSites(array $query = []): void
+  {
+    $query['paginate'] = $query['paginate'] ?? false;
+
+    $response = $this->siteList($query);
+    $body = json_decode($response->getBody()->getContents(), true);
+    $list = $body['data'] ?? [];
+
+    foreach ($list as $site) {
+      $this->disableSite($site['id']);
+    }
+  }
+
   public function enableSite(int $id): ResponseInterface
   {
     return $this->apiPut("sites/{$id}/enable");
+  }
+
+  public function enableSites(array $query = []): void
+  {
+    $query['paginate'] = $query['paginate'] ?? false;
+
+    $response = $this->siteList($query);
+    $body = json_decode($response->getBody()->getContents(), true);
+    $list = $body['data'] ?? [];
+
+    foreach ($list as $site) {
+      $this->enableSite($site['id']);
+    }
   }
 
   public function getSite(int $id): ResponseInterface

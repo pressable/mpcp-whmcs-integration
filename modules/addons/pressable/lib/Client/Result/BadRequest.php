@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace WHMCS\Module\Addon\Pressable\Client\Result;
 
 use Throwable;
-use WHMCS\Module\Addon\Pressable\Api\Error\Pressable as PressableError;
 use WHMCS\Module\Addon\Pressable\Client\Service;
 
 class BadRequest implements Result
@@ -25,11 +24,7 @@ class BadRequest implements Result
 
   public static function fromError(Throwable $e, ?Service $service): self
   {
-    $message = ($e instanceof PressableError)
-      ? $e->getMessage()
-      : '';
-
-    return new self($message, $service);
+    return new self($e->getMessage(), $service);
   }
 
   public function toArray(): array

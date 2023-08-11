@@ -10,6 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 class Pressable extends Exception
 {
 
+  private const API_ERROR_MESSAGE = 'API Error: %s';
   private const DEFAULT_MESSAGE = 'Sorry, an error has occurred';
 
   /** @var ?array */
@@ -22,23 +23,28 @@ class Pressable extends Exception
     return $this;
   }
 
-  public static function fromResponse(ResponseInterface $response)
+  public function getFullMessage(): string
   {
-    $body = json_decode($response->getBody()->getContents(), true);
-
-    return (new self($body['message'] ?? self::DEFAULT_MESSAGE))
-      ->setErrors($body['errors']);
-  }
-
-  public function __toString(): string
-  {
-    $message = parent::__toString();
+    $message = parent::getMessage();
 
     foreach ($this->errors ?? [] as $error) {
       $message .= "\n- {$error}";
     }
 
     return $message;
+  }
+
+  public static function fromResponse(ResponseInterface $response)
+  {
+    $body = json_decode($response->getBody()->getContents(), true);
+    $message = $body['message'] ?? null;
+    if (empty($message) && $response->getStatusCode() >= 400) {
+      $message = "{$response->getStatusCode()} {$response->getReasonPhrase()}";
+      $message = sprintf(self::API_ERROR_MESSAGE, $message);
+    }
+
+    return (new self($message ?? self::DEFAULT_MESSAGE))
+      ->setErrors($body['errors'] ?? null);
   }
 
 }

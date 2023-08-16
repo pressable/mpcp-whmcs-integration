@@ -25,6 +25,8 @@ class CreateSite extends Controller
   {
     $this->assertCanAddSite($config);
 
+    $data['name'] = trim($data['name']);
+    $data['name'] = trim($data['name'], '-');
     $data['name'] = preg_replace(
       ['(\s+)', '([^a-zA-Z0-9-])'],
       ['-', ''],

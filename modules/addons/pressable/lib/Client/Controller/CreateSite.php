@@ -33,6 +33,7 @@ class CreateSite extends Controller
       $data['name']
     );
 
+    $this->assertGoodResponse($this->getApi($config)->validateSiteName($data['name']));
     $this->assertGoodResponse($this->getApi($config)->createSite($data));
 
     return new Redirect('showSiteList', $this->getRedirectData($data), $config);

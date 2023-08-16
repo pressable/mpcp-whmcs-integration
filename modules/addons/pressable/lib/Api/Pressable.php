@@ -182,6 +182,21 @@ class Pressable
     return $this->apiPut("sites/{$siteId}", $data);
   }
 
+  public function validateSiteName(string $name): ResponseInterface
+  {
+    $response = $this->apiPost('sites/validate', ['name' => $name]);
+    $body = $response->getBody();
+
+    $message = json_decode($body->getContents(), true);
+    if (($message['data']['valid'] ?? null) === false) {
+      // Give a failed response with the error message
+      $body->rewind();
+      $response = $response->withStatus(400)->withBody($body);
+    }
+
+    return $response;
+  }
+
   private function apiDelete(string $resource): ResponseInterface
   {
     return $this->getConnection()->delete($resource);

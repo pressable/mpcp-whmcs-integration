@@ -162,6 +162,11 @@ class PressableClientRestricted
     return $this->api->updateSite($siteId, $data);
   }
 
+  public function validateSiteName(string $name): ResponseInterface
+  {
+    return $this->api->validateSiteName($name);
+  }
+
   private function assertAdmin(): void
   {
     if (! $this->isAdmin) {

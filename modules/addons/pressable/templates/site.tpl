@@ -1,5 +1,10 @@
 <p>
-  {$site.name} ({$site.state}){if $site.staging} STAGING{/if}<br />
+  <h3>{$site.name} ({$site.state}){if $site.staging} STAGING{/if}</h3>
+  {if $site.url}
+    <p>
+      <a href="http://{$site.url}" target="_blank">{$site.url}</a> {if $site.wordpressLoginUrl}(<a href="http://{$site.wordpressLoginUrl}" target="_blank">WordPress Admin</a>){/if}
+    </p>
+  {/if}
   {$site.datacenterName}<br />
   IPS: {$site.ipAddressOne} | {$site.ipAddressTwo}<br />
   PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}

@@ -36,8 +36,8 @@
         <td class="fieldarea">
           <select class="form-control select-inline" name="install">
             <option value="">(Use Default)</option>
-            {foreach from=$installOptions item=item}
-              <option value="{$item}">{$item}</option>
+            {foreach from=$installOptions key=key item=item}
+              <option value="{$key}">{$item}</option>
             {/foreach}
           </select>
         </td>

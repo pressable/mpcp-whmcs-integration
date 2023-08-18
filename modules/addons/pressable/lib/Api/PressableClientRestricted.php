@@ -138,7 +138,7 @@ class PressableClientRestricted
       throw PressableError::fromResponse($response);
     }
 
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
 
     return (int)($body['page']['totalItems']);
   }
@@ -192,7 +192,7 @@ class PressableClientRestricted
   {
     if (! isset($this->client_site_ids)) {
       $response = $this->clientSiteList(['paginate' => false]);
-      $body = json_decode($response->getBody()->getContents(), true);
+      $body = json_decode((string)$response->getBody(), true);
       $list = $body['data'] ?? [];
 
       $this->client_site_ids = array_map(static function ($site) {

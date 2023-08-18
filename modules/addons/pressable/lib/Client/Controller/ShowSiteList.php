@@ -26,7 +26,7 @@ class ShowSiteList extends Controller
     $list = [];
 
     $response = $this->assertGoodResponse($api->datacenterList());
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     foreach ($body['data'] ?? [] as $item) {
       $list[$item['code']] = $item['name'];
     }
@@ -47,7 +47,7 @@ class ShowSiteList extends Controller
     };
 
     $response = $this->assertGoodResponse($api->siteInstallOptionList());
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     foreach ($body['data'] ?? [] as $item) {
       $list[$item] = $display($item);
     }
@@ -62,7 +62,7 @@ class ShowSiteList extends Controller
     $list = [];
 
     $response = $this->assertGoodResponse($api->phpVersionsList());
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     foreach ($body['data'] ?? [] as $item) {
       $list[$item] = $item;
     }
@@ -78,7 +78,7 @@ class ShowSiteList extends Controller
     $service = $config['service'];
 
     $response = $this->assertGoodResponse($api->siteList($data));
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
 
     $isAdmin = (new CurrentUser())->isMasqueradingAdmin();
 

@@ -49,7 +49,7 @@ class Pressable
     $data = $this->whitelist($data, $whitelist);
 
     $response = $this->apiPost('sites', $data);
-    $body = json_decode($response->getBody()->getContents(), true) ?? [];
+    $body = json_decode((string)$response->getBody(), true) ?? [];
 
     $siteId = (int)($body['data']['id'] ?? 0);
     if ($siteId > 0) {
@@ -71,7 +71,7 @@ class Pressable
   public function deleteAllSites(string $tag): void
   {
     $response = $this->siteList(['tag_name' => $tag]);
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
 
     foreach ($body['data'] ?? [] as $site) {
       $this->deleteSite($site['id']);
@@ -98,7 +98,7 @@ class Pressable
     $query['paginate'] = $query['paginate'] ?? false;
 
     $response = $this->siteList($query);
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     $list = $body['data'] ?? [];
 
     foreach ($list as $site) {
@@ -116,7 +116,7 @@ class Pressable
     $query['paginate'] = $query['paginate'] ?? false;
 
     $response = $this->siteList($query);
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     $list = $body['data'] ?? [];
 
     foreach ($list as $site) {
@@ -246,7 +246,7 @@ class Pressable
         ]
       );
 
-      $body = json_decode($response->getBody()->getContents(), true);
+      $body = json_decode((string)$response->getBody(), true);
 
       if (isset($body['access_token'])) {
         $this->token = $body['access_token'];

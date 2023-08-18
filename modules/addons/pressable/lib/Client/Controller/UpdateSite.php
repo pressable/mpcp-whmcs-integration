@@ -17,7 +17,7 @@ class UpdateSite extends Controller
 
     // currently only allowing to set PHP version but we need to give all this data
     $response = $this->assertGoodResponse($api->getSite($id));
-    $site = json_decode($response->getBody()->getContents(), true)['data'];
+    $site = json_decode((string)$response->getBody(), true)['data'];
     $data = [
       'php_version' => $data['php_version'] ?? null,
       'name' => $site['name'],

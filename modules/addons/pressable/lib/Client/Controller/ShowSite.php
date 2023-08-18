@@ -16,7 +16,7 @@ class ShowSite extends Controller
     $list = [];
 
     $response = $this->assertGoodResponse($api->phpVersionsList());
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     foreach ($body['data'] ?? [] as $item) {
       $list[$item] = $item;
     }
@@ -32,13 +32,13 @@ class ShowSite extends Controller
     $id = (int)$data['siteId'];
 
     $response = $this->assertGoodResponse($api->getSite($id));
-    $site = json_decode($response->getBody()->getContents(), true)['data'];
+    $site = json_decode((string)$response->getBody(), true)['data'];
 
     $response = $this->assertGoodResponse($api->getSiteDomains($id));
-    $domains = json_decode($response->getBody()->getContents(), true)['data'] ?? [];
+    $domains = json_decode((string)$response->getBody(), true)['data'] ?? [];
 
     $response = $this->assertGoodResponse($api->getSiteBackups($id));
-    $backups = json_decode($response->getBody()->getContents(), true)['data'] ?? [];
+    $backups = json_decode((string)$response->getBody(), true)['data'] ?? [];
 
     $phpVersions = $this->getOptionsPhpVersion($api);
 

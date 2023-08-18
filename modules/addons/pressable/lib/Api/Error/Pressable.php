@@ -36,7 +36,7 @@ class Pressable extends Exception
 
   public static function fromResponse(ResponseInterface $response)
   {
-    $body = json_decode($response->getBody()->getContents(), true);
+    $body = json_decode((string)$response->getBody(), true);
     $message = $body['message'] ?? null;
     if (empty($message) && $response->getStatusCode() >= 400) {
       $message = "{$response->getStatusCode()} {$response->getReasonPhrase()}";

@@ -19,7 +19,7 @@
   <a href="{$url}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch PHPMyAdmin</a>
 </p>
 <p>
-  SFTP: <code>{$ftpUsername}</code> {include file="./reset_ftp_password_button.tpl" siteId=$site.id url=$url username=$ftpUsername}
+  SFTP: <code>{$site.ftpUsername}</code> {include file="./reset_ftp_password_button.tpl" siteId=$site.id url=$url username=$site.ftpUsername}
 </p>
 
 <hr />

@@ -124,6 +124,11 @@ class Pressable
     }
   }
 
+  public function getFtpUsers(int $id): ResponseInterface
+  {
+    return $this->apiGet("sites/{$id}/ftp");
+  }
+
   public function getPhpMyAdminUrl(int $id): ResponseInterface
   {
     return $this->apiGet("sites/{$id}/wordpress/phpmyadmin");

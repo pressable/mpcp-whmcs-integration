@@ -26,6 +26,22 @@ class ShowSite extends Controller
       : $list;
   }
 
+  private function getFtpUsername(Api $api, int $siteId): ?string
+  {
+    $response = $this->assertGoodResponse($api->getFtpUsers($siteId));
+    $ftpUsers = json_decode((string)$response->getBody(), true)['data'] ?? [];
+
+    $owner = null;
+    foreach ($ftpUsers as $user) {
+      if ($user['owner']) {
+        $owner = $user;
+        break;
+      }
+    }
+
+    return $owner['username'] ?? null;
+  }
+
   public function __invoke(array $data, array $config): BaseResult
   {
     $api = $this->getApi($config);
@@ -41,6 +57,8 @@ class ShowSite extends Controller
     $backups = json_decode((string)$response->getBody(), true)['data'] ?? [];
 
     $phpVersions = $this->getOptionsPhpVersion($api);
+
+    $site['ftpUsername'] = $this->getFtpUsername($api, $id);
 
     return new Result(
       $site,

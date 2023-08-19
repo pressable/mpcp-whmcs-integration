@@ -124,6 +124,11 @@ class Pressable
     }
   }
 
+  public function getPhpMyAdminUrl(int $id): ResponseInterface
+  {
+    return $this->apiGet("sites/{$id}/wordpress/phpmyadmin");
+  }
+
   public function getSite(int $id): ResponseInterface
   {
     return $this->apiGet("sites/{$id}");

@@ -90,6 +90,13 @@ class PressableClientRestricted
     return $this->api->enableSite($id);
   }
 
+  public function getPhpMyAdminUrl(int $id): ResponseInterface
+  {
+    $this->assertSiteRestriction($id);
+
+    return $this->api->getPhpMyAdminUrl($id);
+  }
+
   public function getSite(int $id): ResponseInterface
   {
     $this->assertSiteRestriction($id);

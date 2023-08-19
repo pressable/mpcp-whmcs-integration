@@ -10,6 +10,9 @@
   PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}
 </p>
 <p>
+  <a href="{$url}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch PHPMyAdmin</a>
+</p>
+<p>
   {include file="./reset_wordpress_password_button.tpl" siteId=$site.id url=$url}
 </p>
 

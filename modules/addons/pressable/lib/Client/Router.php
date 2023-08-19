@@ -19,6 +19,7 @@ class Router
     'deleteSite',
     'domainAdd',
     'domainDelete',
+    'phpMyAdmin',
     'resetWpPassword',
     'restoreFromBackup',
     'showSite',

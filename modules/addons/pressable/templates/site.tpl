@@ -12,15 +12,30 @@
 <hr />
 
 <h2>Manage</h2>
-<p>
-  {if $site.wordpressLoginUrl}(<a href="http://{$site.wordpressLoginUrl}" target="_blank"><i class="fas fa-external-link"></i> WordPress Admin</a>){/if} {include file="./reset_wordpress_password_button.tpl" siteId=$site.id url=$url}
-</p>
-<p>
-  <a href="{$url}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch PHPMyAdmin</a>
-</p>
-<p>
-  SFTP: <code>{$site.ftpUsername}</code> {include file="./reset_ftp_password_button.tpl" siteId=$site.id url=$url username=$site.ftpUsername}
-</p>
+<table>
+  <tr>
+    <td>
+      <a href="{$url}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch phpMyAdmin</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="http://{$site.wordpressLoginUrl}" target="_blank"><i class="fas fa-external-link"></i> WordPress Admin</a>
+    </td>
+    <td>
+      {include file="./reset_wordpress_password_button.tpl" siteId=$site.id url=$url}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      SFTP username: <code>{$site.ftpUsername}</code>
+    </td>
+    <td>
+      {include file="./reset_ftp_password_button.tpl" siteId=$site.id url=$url username=$site.ftpUsername}
+    </td>
+  </tr>
+</table>
 
 <hr />
 

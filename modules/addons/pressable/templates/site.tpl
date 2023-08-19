@@ -2,18 +2,24 @@
   <h3>{$site.name} ({$site.state}){if $site.staging} STAGING{/if}</h3>
   {if $site.url}
     <p>
-      <a href="http://{$site.url}" target="_blank">{$site.url}</a> {if $site.wordpressLoginUrl}(<a href="http://{$site.wordpressLoginUrl}" target="_blank">WordPress Admin</a>){/if}
-    </p>
+      <a href="http://{$site.url}" target="_blank">{$site.url}</a>    </p>
   {/if}
   {$site.datacenterName}<br />
   IPS: {$site.ipAddressOne} | {$site.ipAddressTwo}<br />
   PHP: {$site.phpVersion} {include file="./site_change_php_version_button.tpl" siteId=$site.id url=$url currentVersion=$site.phpVersion versions=$phpVersions}
 </p>
+
+<hr />
+
+<h2>Manage</h2>
+<p>
+  {if $site.wordpressLoginUrl}(<a href="http://{$site.wordpressLoginUrl}" target="_blank"><i class="fas fa-external-link"></i> WordPress Admin</a>){/if} {include file="./reset_wordpress_password_button.tpl" siteId=$site.id url=$url}
+</p>
 <p>
   <a href="{$url}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch PHPMyAdmin</a>
 </p>
 <p>
-  {include file="./reset_wordpress_password_button.tpl" siteId=$site.id url=$url}
+  SFTP: <code>{$ftpUsername}</code> {include file="./reset_ftp_password_button.tpl" siteId=$site.id url=$url username=$ftpUsername}
 </p>
 
 <hr />

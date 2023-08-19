@@ -166,6 +166,11 @@ class Pressable
     return $this->apiGet('sites/php-versions');
   }
 
+  public function resetFtpPassword(int $siteId, string $username): ResponseInterface
+  {
+    return $this->apiPost("sites/{$siteId}/ftp/password/{$username}");
+  }
+
   public function resetWpPassword(int $siteId): ResponseInterface
   {
     return $this->apiPut("sites/{$siteId}/wordpress/password-reset");

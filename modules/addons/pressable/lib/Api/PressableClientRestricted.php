@@ -123,6 +123,13 @@ class PressableClientRestricted
     return $this->api->phpVersionsList();
   }
 
+  public function resetFtpPassword(int $siteId, string $username): ResponseInterface
+  {
+    $this->assertSiteRestriction($siteId);
+
+    return $this->api->resetFtpPassword($siteId, $username);
+  }
+
   public function resetWpPassword(int $siteId): ResponseInterface
   {
     $this->assertSiteRestriction($siteId);

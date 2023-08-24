@@ -15,7 +15,7 @@
 <table>
   <tr>
     <td>
-      <a href="{$url}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch phpMyAdmin</a>
+      <a href="{$url}&siteId={$site.id}&_action=phpMyAdmin" target="_blank"><i class="fas fa-external-link"></i> Launch phpMyAdmin</a>
     </td>
     <td></td>
   </tr>

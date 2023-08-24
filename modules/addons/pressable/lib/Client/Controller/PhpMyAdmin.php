@@ -15,7 +15,7 @@ class PhpMyAdmin extends Controller
     $response = $this->assertGoodResponse($this->getApi($config)->getPhpMyAdminUrl($id));
     $url = json_decode((string)$response->getBody(), true)['data'];
 
-    header($url);
+    header("Location: {$url}");
     exit;
   }
 

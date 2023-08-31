@@ -23,9 +23,9 @@ mv servers/pressable/ <path-to-whmcs>/modules/servers/
 2. If you have not already, you will need to create a Group
    ![Creating a Product Group in WHMCS](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/CreateProductGroup.jpg)
 3. If you have not already, from the Products/Services page create a new Product for reselling of the Pressable service.
-   a. Select Product Type `Other`
-   b. Be sure to give your product a name
-   c. Select Module `Pressable`
+   1. Select Product Type `Other`
+   2. Be sure to give your product a name
+   3. Select Module `Pressable`
 4. After creating, you can edit the Product to configure the plan options, including the number of sites allowed (on the Module Settings tab of the product edit page)
 
 ## Managing your Client's Sites

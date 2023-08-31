@@ -14,14 +14,14 @@ mv servers/pressable/ <path-to-whmcs>/modules/servers/
 3. Select “Configure” for the Pressable module
 4. Enter the Pressable API credentials ([see instructions](#pressable-api-credentials))
 
-![Configure the Pressable Addon in WHMCS](https://github.com/pressable/mpcp-whmcs-integration/assets/11565712/0fec0191-d79d-46fc-9acd-f2b6d9bc60f4)
+![Configure the Pressable Addon in WHMCS](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/ConfigureAddon.jpg)
 
 ## Configure your Products
 
 1. Navigate to the Products/Services page (`<admin-url>/configproducts.php`)
 (Wrench Icon > System Settings > Products/Services)
 2. If you have not already, you will need to create a Group
-   ![Creating a Product Group in WHMCS](https://github.com/pressable/mpcp-whmcs-integration/assets/11565712/8615fc88-6375-4761-82bf-63b29e01f07b)
+   ![Creating a Product Group in WHMCS](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/CreateProductGroup.jpg)
 3. If you have not already, from the Products/Services page create a new Product for reselling of the Pressable service.
    a. Select Product Type `Other`
    b. Be sure to give your product a name
@@ -34,13 +34,13 @@ From any client profile page in your WHMCS admin, you can select `Login as Owner
 
 As the client:
 1. Click `View Details` on an active product
-   ![Client's view of an active product](https://github.com/pressable/mpcp-whmcs-integration/assets/11565712/c09f0428-b6a2-4764-874a-789e08c9e7aa)
+   ![Client's view of an active product](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/ActiveProduct.jpg)
 2. Click `Manage Sites`
 3. Add a site, or select one in the list if already added
    
-   ![Add a site](https://github.com/pressable/mpcp-whmcs-integration/assets/11565712/636c070f-03c2-4a04-bbec-b5af2bbc8748)
+   ![Add a site](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/CreateSite.jpg)
 
-   ![Manage a site](https://github.com/pressable/mpcp-whmcs-integration/assets/11565712/09cb76b4-3805-4a69-911e-3a3e47ee6259)
+   ![Manage a site](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/ManageSite.jpg)
 
 ## Pressable API Credentials
 
@@ -49,4 +49,4 @@ As the client:
 3. Give it all permissions
 4. Copy/Paste the `Client ID` and `Client Secret` into the [WHMCS addon configuration](#activate--configure-the-addon)
    
-   ![Pressable API Permissions](https://github.com/pressable/mpcp-whmcs-integration/assets/11565712/f6501075-9c60-4088-bcd5-ddb7825798dd)
+   ![Pressable API Permissions](https://github.com/pressable/mpcp-whmcs-integration/blob/ce2ed7e373ca8411bef4e7688279723afb67ae29/docs/ApiPermissions.jpg)

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace WHMCS\Module\Addon\Pressable\Api\Error;
 
 use Exception;

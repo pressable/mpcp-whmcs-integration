@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use WHMCS\Module\Addon\Pressable\Api\Pressable as Api;
 use WHMCS\Module\Addon\Pressable\Api\Whmcs;
 

@@ -56,7 +56,6 @@
   <rule ref="Generic.PHP.LowerCaseKeyword"/>
   <rule ref="Generic.PHP.LowerCaseType"/>
   <rule ref="Generic.PHP.NoSilencedErrors"/>
-  <rule ref="Generic.PHP.RequireStrictTypes"/>
   <rule ref="Generic.PHP.Syntax"/>
   <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
   <rule ref="Generic.VersionControl.GitMergeConflict"/>
@@ -191,7 +190,6 @@
   <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
   <rule ref="SlevomatCodingStandard.PHP.TypeCast"/>
   <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
-  <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
   <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
   <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
